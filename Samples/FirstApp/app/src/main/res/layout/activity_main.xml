@@ -18,7 +18,7 @@
         android:id="@+id/helloButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello Button"
+        android:text="Previous"
         android:textSize="30sp"
         android:onClick="onBtnHello"
         />
@@ -26,7 +26,7 @@
         android:id="@+id/worldButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="World Button"
+        android:text="Next"
         android:textSize="30sp"
         android:onClick="onBtnWorld"
         />

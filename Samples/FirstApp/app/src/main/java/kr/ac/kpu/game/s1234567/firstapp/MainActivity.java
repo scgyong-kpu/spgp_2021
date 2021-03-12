@@ -31,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBtnHello(View view) {
-        mainTextView.setText("Hello");
+        mainTextView.setText("2 / 5");
         mainImageView.setImageResource(R.mipmap.cat2);
     }
 
     public void onBtnWorld(View view) {
-        mainTextView.setText("World");
+        mainTextView.setText("3 / 5");
         mainImageView.setImageResource(R.mipmap.cat3);
     }
 }

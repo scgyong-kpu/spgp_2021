@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mainTextView;
+    private ImageView mainImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
         mainTextView = findViewById(R.id.mainTextView);
         mainTextView.setText("Program started");
+
+        mainImageView = findViewById(R.id.mainImageView);
 
 //        Button helloButton = findViewById(R.id.helloButton);
 //        helloButton.setOnClickListener(this);
@@ -28,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtnHello(View view) {
         mainTextView.setText("Hello");
+        mainImageView.setImageResource(R.mipmap.cat2);
     }
 
     public void onBtnWorld(View view) {
         mainTextView.setText("World");
+        mainImageView.setImageResource(R.mipmap.cat3);
     }
 }
 

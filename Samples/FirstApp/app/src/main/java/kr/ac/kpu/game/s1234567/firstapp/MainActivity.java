@@ -19,11 +19,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button helloButton = findViewById(R.id.helloButton);
         helloButton.setOnClickListener(this);
+
+        Button worldButton = findViewById(R.id.worldButton);
+        worldButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         TextView tv = findViewById(R.id.mainTextView);
-        tv.setText("Hello");
+        if (view.getId() == R.id.helloButton) {
+            tv.setText("Hello");
+        } else {
+            tv.setText("World");
+        }
     }
 }
+
+
+
+
+
+
+
+
+

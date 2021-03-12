@@ -15,6 +15,7 @@
         android:textSize="40sp"
         />
     <Button
+        android:id="@+id/helloButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hello Button"

@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Hello Button"
         android:textSize="30sp"
+        android:onClick="onBtnHello"
         />
     <Button
         android:id="@+id/worldButton"
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content"
         android:text="World Button"
         android:textSize="30sp"
+        android:onClick="onBtnWorld"
         />
 
 </LinearLayout>

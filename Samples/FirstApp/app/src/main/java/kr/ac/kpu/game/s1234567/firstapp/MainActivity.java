@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,15 +12,26 @@ public class MainActivity extends AppCompatActivity {
     private TextView mainTextView;
     private ImageView mainImageView;
 
+    private int pageIndex;
+    private static int[] resIds = {
+            R.mipmap.cat1,
+            R.mipmap.cat2,
+            R.mipmap.cat3,
+            R.mipmap.cat4,
+            R.mipmap.cat5,
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainTextView = findViewById(R.id.mainTextView);
-        mainTextView.setText("Program started");
+        pageIndex = 0;
 
+        mainTextView = findViewById(R.id.mainTextView);
         mainImageView = findViewById(R.id.mainImageView);
+
+        showImage();
 
 //        Button helloButton = findViewById(R.id.helloButton);
 //        helloButton.setOnClickListener(this);
@@ -30,14 +40,26 @@ public class MainActivity extends AppCompatActivity {
 //        worldButton.setOnClickListener(this);
     }
 
-    public void onBtnHello(View view) {
-        mainTextView.setText("2 / 5");
-        mainImageView.setImageResource(R.mipmap.cat2);
+    public void onBtnPrevious(View view) {
+        if (pageIndex == 0) {
+            return; // early return
+        }
+        pageIndex--;
+        showImage();
     }
 
-    public void onBtnWorld(View view) {
-        mainTextView.setText("3 / 5");
-        mainImageView.setImageResource(R.mipmap.cat3);
+    public void onBtnNext(View view) {
+        if (pageIndex == resIds.length - 1) {
+            return; // early return
+        }
+        pageIndex++;
+        showImage();
+    }
+
+    private void showImage() {
+        mainTextView.setText((pageIndex + 1) + " / " + resIds.length);
+        int resId = resIds[pageIndex];
+        mainImageView.setImageResource(resId);
     }
 }
 

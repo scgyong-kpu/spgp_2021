@@ -7,29 +7,38 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/mainTextView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textSize="40sp"
-        />
-    <Button
-        android:id="@+id/helloButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Previous"
-        android:textSize="30sp"
-        android:onClick="onBtnHello"
-        />
-    <Button
-        android:id="@+id/worldButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        android:textSize="30sp"
-        android:onClick="onBtnWorld"
-        />
+        android:orientation="horizontal"
+        >
+        <ImageButton
+            android:id="@+id/helloButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/prev"
+            android:textSize="30sp"
+            android:onClick="onBtnPrevious"
+            />
+        <TextView
+            android:id="@+id/mainTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hello World!"
+            android:textSize="40sp"
+            android:gravity="center"
+            />
+        <ImageButton
+            android:id="@+id/worldButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/next"
+            android:textSize="30sp"
+            android:onClick="onBtnNext"
+            />
+
+    </LinearLayout>
     <ImageView
         android:id="@+id/mainImageView"
         android:layout_width="match_parent"

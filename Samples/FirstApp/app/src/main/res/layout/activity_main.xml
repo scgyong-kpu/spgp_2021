@@ -16,7 +16,7 @@
             android:id="@+id/helloButton"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@mipmap/prev"
+            android:background="@drawable/sel_btn_prev"
             android:textSize="30sp"
             android:onClick="onBtnPrevious"
             />
@@ -33,7 +33,7 @@
             android:id="@+id/worldButton"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@mipmap/next"
+            android:background="@drawable/sel_btn_next"
             android:textSize="30sp"
             android:onClick="onBtnNext"
             />

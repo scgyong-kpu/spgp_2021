@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mainTextView;
     private ImageView mainImageView;
+    private ImageButton prevButton;
+    private ImageButton nextButton;
 
     private int pageIndex;
     private static int[] resIds = {
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         mainTextView = findViewById(R.id.mainTextView);
         mainImageView = findViewById(R.id.mainImageView);
+        prevButton = findViewById(R.id.helloButton);
+        nextButton = findViewById(R.id.worldButton);
 
         showImage();
 
@@ -60,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         mainTextView.setText((pageIndex + 1) + " / " + resIds.length);
         int resId = resIds[pageIndex];
         mainImageView.setImageResource(resId);
+
+        prevButton.setEnabled(pageIndex != 0);
+        nextButton.setEnabled(pageIndex != resIds.length - 1);
     }
 }
 

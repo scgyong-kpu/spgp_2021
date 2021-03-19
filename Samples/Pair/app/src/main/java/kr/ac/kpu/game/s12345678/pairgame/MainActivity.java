@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private ImageButton prevButton;
+    private int visibleCardCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
             imageButton.setVisibility(View.INVISIBLE);
             prevButton.setVisibility(View.INVISIBLE);
             prevButton = null;
+            visibleCardCount -= 2;
+            if (visibleCardCount == 0) {
+                startGame();
+            }
             return;
         }
         prevButton = imageButton;
@@ -93,5 +98,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         prevButton = null;
+        visibleCardCount = cards.length;
     }
 }

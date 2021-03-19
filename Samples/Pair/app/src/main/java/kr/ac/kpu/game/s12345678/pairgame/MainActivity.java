@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -30,11 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageButton prevButton;
     private int visibleCardCount;
+    private TextView scoreTextView;
+
+    public void setScore(int score) {
+        this.score = score;
+        scoreTextView.setText("Flips: " + score);
+    }
+
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        scoreTextView = findViewById(R.id.scoreTextView);
 
         startGame();
     }
@@ -66,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
                 askRestart();
             }
             return;
+        }
+        if (prevButton != null) {
+            setScore(score + 1);
         }
         prevButton = imageButton;
     }
@@ -116,5 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
         prevButton = null;
         visibleCardCount = cards.length;
+
+        setScore(0);
     }
 }

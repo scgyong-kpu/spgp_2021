@@ -23,19 +23,45 @@ public class MainActivity extends AppCompatActivity {
             R.mipmap.card_as, R.mipmap.card_as, R.mipmap.card_jc, R.mipmap.card_jc,
             R.mipmap.card_qh, R.mipmap.card_qh, R.mipmap.card_kd, R.mipmap.card_kd,
     };
+
+    private ImageButton prevButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        for (int i = 0; i < buttonIds.length; i++) {
+            ImageButton b = findViewById(buttonIds[i]);
+            b.setTag(cards[i]);
+        }
     }
 
     public void onBtnCard(View view) {
+        if (view == prevButton) {
+            return;
+        }
+
+        int prevCard = 0;
+        if (prevButton != null) {
+            prevButton.setImageResource(R.mipmap.card_blue_back);
+            prevCard = (Integer) prevButton.getTag();
+        }
+
         int buttonIndex = getButtonIndex(view.getId());
         Log.d(TAG, "onBtnCard() has been called. ID=" + view.getId() + " buttonIndex=" + buttonIndex);
 
         int card = cards[buttonIndex];
         ImageButton imageButton = (ImageButton)view;
         imageButton.setImageResource(card);
+
+        if (card == prevCard) {
+            imageButton.setVisibility(View.INVISIBLE);
+            prevButton.setVisibility(View.INVISIBLE);
+            prevButton = null;
+            return;
+        }
+        prevButton = imageButton;
     }
 
     private int getButtonIndex(int resId) {

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName(); // "MainActivity";
@@ -30,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Random random = new Random();
+        for (int i = 0; i < cards.length; i++) {
+            int ri = random.nextInt(cards.length);
+            int t = cards[i];
+            cards[i] = cards[ri];
+            cards[ri] = t;
+        }
 
         for (int i = 0; i < buttonIds.length; i++) {
             ImageButton b = findViewById(buttonIds[i]);

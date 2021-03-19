@@ -33,18 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Random random = new Random();
-        for (int i = 0; i < cards.length; i++) {
-            int ri = random.nextInt(cards.length);
-            int t = cards[i];
-            cards[i] = cards[ri];
-            cards[ri] = t;
-        }
-
-        for (int i = 0; i < buttonIds.length; i++) {
-            ImageButton b = findViewById(buttonIds[i]);
-            b.setTag(cards[i]);
-        }
+        startGame();
     }
 
     public void onBtnCard(View view) {
@@ -81,5 +70,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return -1;
+    }
+
+    public void onBtnRestart(View view) {
+        startGame();
+    }
+
+    private void startGame() {
+        Random random = new Random();
+        for (int i = 0; i < cards.length; i++) {
+            int ri = random.nextInt(cards.length);
+            int t = cards[i];
+            cards[i] = cards[ri];
+            cards[ri] = t;
+        }
+
+        for (int i = 0; i < buttonIds.length; i++) {
+            ImageButton b = findViewById(buttonIds[i]);
+            b.setTag(cards[i]);
+            b.setVisibility(View.VISIBLE);
+            b.setImageResource(R.mipmap.card_blue_back);
+        }
+
+        prevButton = null;
     }
 }

@@ -1,7 +1,9 @@
 package kr.ac.kpu.game.s12345678.pairgame;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             prevButton = null;
             visibleCardCount -= 2;
             if (visibleCardCount == 0) {
-                startGame();
+                askRestart();
             }
             return;
         }
@@ -78,7 +80,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBtnRestart(View view) {
-        startGame();
+        askRestart();
+    }
+
+    private void askRestart() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Restart");
+        builder.setMessage("Do you really want to restart the game?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startGame();
+            }
+        });
+        builder.setNegativeButton("No", null);
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void startGame() {

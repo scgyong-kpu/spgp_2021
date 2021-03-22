@@ -52,8 +52,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtnCard(View view) {
         if (view == prevButton) {
+            int color = getResources().getColor(R.color.purple_700);
+            scoreTextView.setTextColor(color);
             return;
         }
+
+        int color = getResources().getColor(R.color.gray);
+        scoreTextView.setTextColor(color);
 
         int prevCard = 0;
         if (prevButton != null) {

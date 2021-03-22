@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements TextWatcher {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private CheckBox firewallCheckbox;
@@ -27,7 +27,22 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         firewallCheckbox = findViewById(R.id.checkbox);
         outTextView = findViewById(R.id.outTextView);
         userEditText = findViewById(R.id.userEditText);
-        userEditText.addTextChangedListener(this);
+        userEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                editTextView.setText("String length = " + s.length());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         editTextView = findViewById(R.id.editTextView);
     }
 
@@ -44,20 +59,5 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
         boolean checked = firewallCheckbox.isChecked();
         String text = checked ? "Checked Firewall" : "Unchecked Firewall";
         outTextView.setText(text);
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        editTextView.setText("String length = " + s.length());
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
     }
 }

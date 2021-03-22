@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/check_use_firewall"
+        android:onClick="onCheckFirewall"
         />
     <TextView
         android:id="@+id/outTextView"

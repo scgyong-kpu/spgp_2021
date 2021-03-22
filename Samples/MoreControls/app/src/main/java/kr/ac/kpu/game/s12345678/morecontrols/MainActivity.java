@@ -25,4 +25,10 @@ public class MainActivity extends AppCompatActivity {
         String text = checked ? "Using Firewall" : "Not using Firewall";
         outTextView.setText(text);
     }
+
+    public void onCheckFirewall(View view) {
+        boolean checked = firewallCheckbox.isChecked();
+        String text = checked ? "Checked Firewall" : "Unchecked Firewall";
+        outTextView.setText(text);
+    }
 }

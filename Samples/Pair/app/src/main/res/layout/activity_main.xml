@@ -33,36 +33,16 @@
         android:layout_weight="1">
         <ImageButton
             android:id="@+id/card_00"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_01"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_02"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_03"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,36 +50,16 @@
         android:layout_weight="1">
         <ImageButton
             android:id="@+id/card_10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_11"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_12"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_13"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,36 +67,16 @@
         android:layout_weight="1">
         <ImageButton
             android:id="@+id/card_20"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_21"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_22"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_23"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -144,36 +84,16 @@
         android:layout_weight="1">
         <ImageButton
             android:id="@+id/card_30"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_31"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_32"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
         <ImageButton
             android:id="@+id/card_33"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/card_blue_back"
-            android:scaleType="fitCenter"
-            android:onClick="onBtnCard"/>
+            style="@style/card_button" />
     </LinearLayout>
 
 </LinearLayout>

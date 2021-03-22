@@ -99,15 +99,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void askRestart() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Restart");
-        builder.setMessage("Do you really want to restart the game?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.restart_dialog_title);
+        builder.setMessage(R.string.restart_dialog_message);
+        builder.setPositiveButton(R.string.common_yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 startGame();
             }
         });
-        builder.setNegativeButton("No", null);
+        builder.setNegativeButton(R.string.common_no, null);
         AlertDialog alert = builder.create();
         alert.show();
     }

@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
         pageIndex--;
         showImage();
+        mainTextView.setTranslationX(10);
     }
 
     public void onBtnNext(View view) {

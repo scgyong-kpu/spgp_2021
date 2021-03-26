@@ -28,10 +28,10 @@ public class MyView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int l = 0 + getLeftPaddingOffset();
-        int t = 0 + getTopPaddingOffset();
-        int w = getWidth() - getRightPaddingOffset();
-        int h = getHeight() - getBottomPaddingOffset();
+        int l = 0 + getPaddingLeft();
+        int t = 0 + getPaddingTop();
+        int w = getWidth() - getPaddingRight() - l;
+        int h = getHeight() - getPaddingBottom() - t;
         rect.set(l, t, w, h);
         Log.d(TAG, "drawing " + rect);
         canvas.drawRect(rect, paint);

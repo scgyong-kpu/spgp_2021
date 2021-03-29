@@ -1,5 +1,6 @@
 package kr.ac.kpu.game.s1234567.samplegame;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -29,7 +30,7 @@ public class GameView extends View {
         doGameFrame();
     }
 
-    Handler handler = new Handler();
+//    Handler handler = new Handler();
 
     private void doGameFrame() {
 //        update();
@@ -39,7 +40,7 @@ public class GameView extends View {
 //        draw();
         invalidate();
 
-        handler.postDelayed(new Runnable() {
+        postDelayed(new Runnable() {
             @Override
             public void run() {
                 doGameFrame();

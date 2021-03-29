@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -28,14 +29,22 @@ public class GameView extends View {
         doGameFrame();
     }
 
+    Handler handler = new Handler();
+
     private void doGameFrame() {
 //        update();
-        x += 0.01;
-        y += 0.02;
+        x += 1;
+        y += 2;
 
 //        draw();
         invalidate();
 
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doGameFrame();
+            }
+        }, 15);
 //        doGameFrame();
     }
 

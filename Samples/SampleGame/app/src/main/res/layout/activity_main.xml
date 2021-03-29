@@ -9,5 +9,5 @@
     <kr.ac.kpu.game.s1234567.samplegame.GameView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+    />
 </LinearLayout>

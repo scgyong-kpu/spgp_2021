@@ -37,8 +37,8 @@ public class GameView extends View {
 
     private void doGameFrame() {
 //        update();
-        x += 1;
-        y += 2;
+        x += 100 * frameTime;
+        y += 200 * frameTime;
 
 //        draw();
         invalidate();
@@ -46,6 +46,9 @@ public class GameView extends View {
         Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
             @Override
             public void doFrame(long time) {
+                if (lastFrame == 0) {
+                    lastFrame = time;
+                }
                 frameTime = (float) (time - lastFrame) / 1_000_000_000;
                 doGameFrame();
                 lastFrame = time;

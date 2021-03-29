@@ -21,7 +21,7 @@ public class GameView extends View {
     private float x;
     private float y;
     private long lastFrame;
-    private int frameTime;
+    private float frameTime;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -46,7 +46,7 @@ public class GameView extends View {
         Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
             @Override
             public void doFrame(long time) {
-                frameTime = (int) (time - lastFrame);
+                frameTime = (float) (time - lastFrame) / 1_000_000_000;
                 doGameFrame();
                 lastFrame = time;
             }

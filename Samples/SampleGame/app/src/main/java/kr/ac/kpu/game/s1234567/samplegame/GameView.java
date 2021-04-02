@@ -14,10 +14,15 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
+    private static final int BALL_COUNT = 100;
 
-    private Ball b1, b2;
+    //    private Ball b1, b2;
+    ArrayList<Ball> balls = new ArrayList<>();
 
     private long lastFrame;
     public static float frameTime;
@@ -38,8 +43,11 @@ public class GameView extends View {
 
     private void doGameFrame() {
 //        update();
-        b1.update();
-        b2.update();
+        for (Ball b: balls) {
+            b.update();
+        }
+//        b1.update();
+//        b2.update();
 
 //        b1.x += b1.dx * frameTime;
 //        b1.y += b1.dy * frameTime;
@@ -64,14 +72,24 @@ public class GameView extends View {
     }
 
     private void initResources() {
-        b1 = new Ball(100, 100, 200, 300);
-        b2 = new Ball(1000, 100, -250, 350);
+        Random rand = new Random();
+        for (int i = 0; i < BALL_COUNT; i++) {
+            float x = rand.nextInt(1000);
+            float y = rand.nextInt(1000);
+            float dx = rand.nextFloat() * 1000 - 500;
+            float dy = rand.nextFloat() * 1000 - 500;
+            Ball b = new Ball(x, y, dx, dy);
+            balls.add(b);
+        }
+//        b1 = new Ball(100, 100, 200, 300);
+//        b2 = new Ball(1000, 100, -250, 350);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        b1.draw(canvas);
-        b2.draw(canvas);
+        for (Ball b: balls) {
+            b.draw(canvas);
+        }
     }
 }
 

@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-public class Player {
+public class Player implements GameObject {
     private static int imageWidth;
     private static int imageHeight;
     private float x, y;

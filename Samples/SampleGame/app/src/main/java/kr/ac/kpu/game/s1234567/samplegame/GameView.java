@@ -24,7 +24,8 @@ public class GameView extends View {
 
     //    private Ball b1, b2;
     Player player;
-    ArrayList<Ball> balls = new ArrayList<>();
+//    ArrayList<Ball> balls = new ArrayList<>();
+    ArrayList<GameObject> objects = new ArrayList<>();
 
     private long lastFrame;
     public static float frameTime;
@@ -45,10 +46,15 @@ public class GameView extends View {
 
     private void doGameFrame() {
 //        update();
-        for (Ball b: balls) {
-            b.update();
+        for (GameObject o : objects) {
+            o.update();
+//            if (o instanceof Ball) {
+//                ((Ball) o).update();
+//            } else if (o instanceof Player) {
+//                ((Player)o).update();
+//            }
         }
-        player.update();
+//        player.update();
 //        b1.update();
 //        b2.update();
 
@@ -83,18 +89,19 @@ public class GameView extends View {
             float dx = rand.nextFloat() * 1000 - 500;
             float dy = rand.nextFloat() * 1000 - 500;
             Ball b = new Ball(x, y, dx, dy);
-            balls.add(b);
+            objects.add(b);
         }
+        objects.add(player);
 //        b1 = new Ball(100, 100, 200, 300);
 //        b2 = new Ball(1000, 100, -250, 350);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for (Ball b: balls) {
-            b.draw(canvas);
+        for (GameObject o: objects) {
+            o.draw(canvas);
         }
-        player.draw(canvas);
+//        player.draw(canvas);
     }
 
     @Override

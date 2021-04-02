@@ -20,6 +20,8 @@ public class GameView extends View {
 
     private float x;
     private float y;
+    private float x2;
+    private float y2;
     private long lastFrame;
     private float frameTime;
 
@@ -39,6 +41,9 @@ public class GameView extends View {
 //        update();
         x += 100 * frameTime;
         y += 200 * frameTime;
+
+        x2 += -50 * frameTime;
+        y2 += 150 * frameTime;
 
 //        draw();
         invalidate();
@@ -61,11 +66,14 @@ public class GameView extends View {
         bitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
         x = 100;
         y = 100;
+        x2 = 1000;
+        y2 = 100;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(bitmap, x, y, null);
+        canvas.drawBitmap(bitmap, x2, y2, null);
         Log.d(TAG, "Drawing at: " + x + "," + y + " ft=" + frameTime);
     }
 }

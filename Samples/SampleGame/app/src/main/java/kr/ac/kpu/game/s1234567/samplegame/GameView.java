@@ -18,10 +18,9 @@ public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
     private Bitmap bitmap;
 
-    private float x;
-    private float y;
-    private float x2;
-    private float y2;
+    private Ball b1 = new Ball(100, 100, 100, 200);
+    private Ball b2 = new Ball(1000, 100, -50, 150);
+
     private long lastFrame;
     private float frameTime;
 
@@ -39,11 +38,11 @@ public class GameView extends View {
 
     private void doGameFrame() {
 //        update();
-        x += 100 * frameTime;
-        y += 200 * frameTime;
+        b1.x += b1.dx * frameTime;
+        b1.y += b1.dy * frameTime;
 
-        x2 += -50 * frameTime;
-        y2 += 150 * frameTime;
+        b2.x += b2.dx * frameTime;
+        b2.y += b2.dy * frameTime;
 
 //        draw();
         invalidate();
@@ -64,17 +63,13 @@ public class GameView extends View {
     private void initResources() {
         Resources res = getResources();
         bitmap = BitmapFactory.decodeResource(res, R.mipmap.soccer_ball_240);
-        x = 100;
-        y = 100;
-        x2 = 1000;
-        y2 = 100;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, x, y, null);
-        canvas.drawBitmap(bitmap, x2, y2, null);
-        Log.d(TAG, "Drawing at: " + x + "," + y + " ft=" + frameTime);
+        canvas.drawBitmap(bitmap, b1.x, b1.y, null);
+        canvas.drawBitmap(bitmap, b2.x, b2.y, null);
+//        Log.d(TAG, "Drawing at: " + x + "," + y + " ft=" + frameTime);
     }
 }
 

@@ -14,6 +14,8 @@ public class Player implements GameObject {
     private static int imageHeight;
     private float x, y;
     private float dx, dy;
+    private float tx, ty;
+    private float speed;
     private static Bitmap bitmap;
 
     public Player(float x, float y, float dx, float dy) {
@@ -21,6 +23,9 @@ public class Player implements GameObject {
         this.y = y;
         this.dx = dx;
         this.dy = dy;
+        this.tx = 0;
+        this.ty = 0;
+        this.speed = 800;
         if (bitmap == null) {
             Resources res = GameView.view.getResources();
             bitmap = BitmapFactory.decodeResource(res, R.mipmap.plane_240);
@@ -30,11 +35,21 @@ public class Player implements GameObject {
     }
 
     public void moveTo(float x, float y) {
-        this.x = x;
-        this.y = y;
+        this.tx = x;
+        this.ty = y;
     }
 
     public void update() {
+        MainGame game = MainGame.get();
+        float delta_x = tx - x;
+        float delta_y = ty - y;
+//        float distance = (float) Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+        float angle = (float) Math.atan2(delta_y, delta_x);
+        float move_dist = speed * game.frameTime;
+        float mx = (float) (move_dist * Math.cos(angle));
+        float my = (float) (move_dist * Math.sin(angle));
+        this.x += mx;
+        this.y += my;
 //        this.x += this.dx * GameView.frameTime;
 //        this.y += this.dy * GameView.frameTime;
 //        int w = GameView.view.getWidth();

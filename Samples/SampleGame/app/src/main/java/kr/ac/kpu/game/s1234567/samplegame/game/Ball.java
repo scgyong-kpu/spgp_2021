@@ -30,8 +30,9 @@ public class Ball implements GameObject {
     }
 
     public void update() {
-        this.x += this.dx * GameView.frameTime;
-        this.y += this.dy * GameView.frameTime;
+        MainGame game = MainGame.get();
+        this.x += this.dx * game.frameTime;
+        this.y += this.dy * game.frameTime;
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
         if (x < 0 || x > w - imageWidth) {

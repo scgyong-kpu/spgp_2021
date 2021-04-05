@@ -9,30 +9,21 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import kr.ac.kpu.game.s1234567.samplegame.game.Ball;
-import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
-import kr.ac.kpu.game.s1234567.samplegame.game.Player;
+import kr.ac.kpu.game.s1234567.samplegame.game.MainGame;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
-    private static final int BALL_COUNT = 10;
 
     //    private Ball b1, b2;
-    Player player;
-//    ArrayList<Ball> balls = new ArrayList<>();
-    ArrayList<GameObject> objects = new ArrayList<>();
 
     private long lastFrame;
-    public static float frameTime;
     public static GameView view;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         GameView.view = this;
-        initResources();
+        MainGame game = MainGame.get();
+        game.initResources();
         startUpdating();
     }
 
@@ -40,29 +31,10 @@ public class GameView extends View {
         doGameFrame();
     }
 
-//    Handler handler = new Handler();
-
     private void doGameFrame() {
-//        update();
-        for (GameObject o : objects) {
-            o.update();
-//            if (o instanceof Ball) {
-//                ((Ball) o).update();
-//            } else if (o instanceof Player) {
-//                ((Player)o).update();
-//            }
-        }
-//        player.update();
-//        b1.update();
-//        b2.update();
+        MainGame game = MainGame.get();
+        game.update();
 
-//        b1.x += b1.dx * frameTime;
-//        b1.y += b1.dy * frameTime;
-//
-//        b2.x += b2.dx * frameTime;
-//        b2.y += b2.dy * frameTime;
-//
-//        draw();
         invalidate();
 
         Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
@@ -71,45 +43,23 @@ public class GameView extends View {
                 if (lastFrame == 0) {
                     lastFrame = time;
                 }
-                frameTime = (float) (time - lastFrame) / 1_000_000_000;
+                game.frameTime = (float) (time - lastFrame) / 1_000_000_000;
                 doGameFrame();
                 lastFrame = time;
             }
         });
     }
 
-    private void initResources() {
-        player = new Player(100, 100, 0, 0);
-        Random rand = new Random();
-        for (int i = 0; i < BALL_COUNT; i++) {
-            float x = rand.nextInt(1000);
-            float y = rand.nextInt(1000);
-            float dx = rand.nextFloat() * 1000 - 500;
-            float dy = rand.nextFloat() * 1000 - 500;
-            Ball b = new Ball(x, y, dx, dy);
-            objects.add(b);
-        }
-        objects.add(player);
-//        b1 = new Ball(100, 100, 200, 300);
-//        b2 = new Ball(1000, 100, -250, 350);
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
-        for (GameObject o: objects) {
-            o.draw(canvas);
-        }
-//        player.draw(canvas);
+        MainGame game = MainGame.get();
+        game.draw(canvas);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-            player.moveTo(event.getX(), event.getY());
-            return true;
-        }
-        return false;
+        MainGame game = MainGame.get();
+        return game.onTouchEvent(event);
     }
 }
 

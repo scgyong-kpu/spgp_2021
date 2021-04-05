@@ -11,6 +11,7 @@ import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
 import kr.ac.kpu.game.s1234567.samplegame.ui.view.GameView;
 
 public class Player implements GameObject {
+    private static final String TAG = Player.class.getSimpleName();
     private static int imageWidth;
     private static int imageHeight;
     private float x, y;
@@ -42,9 +43,10 @@ public class Player implements GameObject {
         game.add(bullet);
 //        this.tx = x;
 //        this.ty = y;
-//        float delta_x = tx - this.x;
-//        float delta_y = ty - this.y;
-//        this.angle = (float) Math.atan2(delta_y, delta_x);
+        float delta_x = tx - this.x;
+        float delta_y = ty - this.y;
+        this.angle = (float) Math.atan2(delta_y, delta_x);
+        Log.d(TAG, "Angle = " + angle);
 //        MainGame game = MainGame.get();
 //        float move_dist = speed * game.frameTime;
 //        this.dx = (float) (move_dist * Math.cos(angle));
@@ -65,6 +67,10 @@ public class Player implements GameObject {
     public void draw(Canvas canvas) {
         float left = x - imageWidth / 2;
         float top = y - imageWidth / 2;
+        float degree = (float) (angle * 180 / Math.PI);
+        canvas.save();
+        canvas.rotate(degree, x, y);
         canvas.drawBitmap(bitmap, left, top, null);
+        canvas.restore();
     }
 }

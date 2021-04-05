@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.activity.MainActivity">
 
-    <kr.ac.kpu.game.s1234567.samplegame.GameView
+    <kr.ac.kpu.game.s1234567.samplegame.ui.view.GameView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     />

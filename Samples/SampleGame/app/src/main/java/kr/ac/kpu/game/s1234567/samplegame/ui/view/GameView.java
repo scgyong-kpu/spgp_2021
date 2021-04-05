@@ -1,14 +1,8 @@
-package kr.ac.kpu.game.s1234567.samplegame;
+package kr.ac.kpu.game.s1234567.samplegame.ui.view;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +11,10 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import kr.ac.kpu.game.s1234567.samplegame.game.Ball;
+import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
+import kr.ac.kpu.game.s1234567.samplegame.game.Player;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();

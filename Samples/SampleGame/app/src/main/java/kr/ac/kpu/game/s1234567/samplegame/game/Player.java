@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.samplegame.R;
 import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
@@ -17,6 +18,7 @@ public class Player implements GameObject {
     private float tx, ty;
     private float speed;
     private static Bitmap bitmap;
+    private float angle = 0;
 
     public Player(float x, float y, float dx, float dy) {
         this.x = x;
@@ -37,23 +39,23 @@ public class Player implements GameObject {
     public void moveTo(float x, float y) {
         this.tx = x;
         this.ty = y;
+        float delta_x = tx - this.x;
+        float delta_y = ty - this.y;
+        this.angle = (float) Math.atan2(delta_y, delta_x);
+        MainGame game = MainGame.get();
+        float move_dist = speed * game.frameTime;
+        this.dx = (float) (move_dist * Math.cos(angle));
+        this.dy = (float) (move_dist * Math.sin(angle));
     }
 
     public void update() {
-        MainGame game = MainGame.get();
-        float delta_x = tx - x;
-        float delta_y = ty - y;
-        float distance = (float) Math.sqrt(delta_x * delta_x + delta_y * delta_y);
-        float move_dist = speed * game.frameTime;
-        if (distance < move_dist) {
+        x += dx;
+        if ((dx > 0 && x > tx) || (dx < 0 && x < tx)) {
             x = tx;
+        }
+        y += dy;
+        if ((dy > 0 && y > ty) || (dy < 0 && y < ty)) {
             y = ty;
-        } else {
-            float angle = (float) Math.atan2(delta_y, delta_x);
-            float mx = (float) (move_dist * Math.cos(angle));
-            float my = (float) (move_dist * Math.sin(angle));
-            x += mx;
-            y += my;
         }
     }
 

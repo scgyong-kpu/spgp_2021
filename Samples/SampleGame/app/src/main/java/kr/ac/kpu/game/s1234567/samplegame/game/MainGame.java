@@ -73,4 +73,13 @@ public class MainGame {
     public void add(GameObject gameObject) {
         objects.add(gameObject);
     }
+
+    public void remove(GameObject gameObject) {
+        GameView.view.post(new Runnable() {
+            @Override
+            public void run() {
+                objects.remove(gameObject);
+            }
+        });
+    }
 }

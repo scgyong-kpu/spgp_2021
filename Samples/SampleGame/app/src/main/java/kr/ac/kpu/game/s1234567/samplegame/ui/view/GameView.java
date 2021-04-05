@@ -3,6 +3,7 @@ package kr.ac.kpu.game.s1234567.samplegame.ui.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,9 +23,15 @@ public class GameView extends View {
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         GameView.view = this;
+        startUpdating();
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        //super.onSizeChanged(w, h, oldw, oldh);
+        Log.d(TAG, "onSize: " + w + "," + h);
         MainGame game = MainGame.get();
         game.initResources();
-        startUpdating();
     }
 
     private void startUpdating() {

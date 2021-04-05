@@ -43,23 +43,18 @@ public class Player implements GameObject {
         MainGame game = MainGame.get();
         float delta_x = tx - x;
         float delta_y = ty - y;
-//        float distance = (float) Math.sqrt(delta_x * delta_x + delta_y * delta_y);
-        float angle = (float) Math.atan2(delta_y, delta_x);
+        float distance = (float) Math.sqrt(delta_x * delta_x + delta_y * delta_y);
         float move_dist = speed * game.frameTime;
-        float mx = (float) (move_dist * Math.cos(angle));
-        float my = (float) (move_dist * Math.sin(angle));
-        this.x += mx;
-        this.y += my;
-//        this.x += this.dx * GameView.frameTime;
-//        this.y += this.dy * GameView.frameTime;
-//        int w = GameView.view.getWidth();
-//        int h = GameView.view.getHeight();
-//        if (x < 0 || x > w - imageWidth) {
-//            dx *= -1;
-//        }
-//        if (y < 0 || y > h - imageHeight) {
-//            dy = -dy;
-//        }
+        if (distance < move_dist) {
+            x = tx;
+            y = ty;
+        } else {
+            float angle = (float) Math.atan2(delta_y, delta_x);
+            float mx = (float) (move_dist * Math.cos(angle));
+            float my = (float) (move_dist * Math.sin(angle));
+            x += mx;
+            y += my;
+        }
     }
 
     public void draw(Canvas canvas) {

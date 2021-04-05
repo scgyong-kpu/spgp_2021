@@ -69,4 +69,8 @@ public class MainGame {
         }
         return false;
     }
+
+    public void add(GameObject gameObject) {
+        objects.add(gameObject);
+    }
 }

@@ -43,8 +43,8 @@ public class Player implements GameObject {
         game.add(bullet);
 //        this.tx = x;
 //        this.ty = y;
-        float delta_x = tx - this.x;
-        float delta_y = ty - this.y;
+        float delta_x = x - this.x;
+        float delta_y = y - this.y;
         this.angle = (float) Math.atan2(delta_y, delta_x);
         Log.d(TAG, "Angle = " + angle);
 //        MainGame game = MainGame.get();

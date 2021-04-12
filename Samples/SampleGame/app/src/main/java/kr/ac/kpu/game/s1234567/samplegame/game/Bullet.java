@@ -10,22 +10,19 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.samplegame.R;
+import kr.ac.kpu.game.s1234567.samplegame.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
 import kr.ac.kpu.game.s1234567.samplegame.ui.view.GameView;
 
 public class Bullet implements GameObject {
     private static final String TAG = Bullet.class.getSimpleName();
-    private static int imageWidth;
-    private static int imageHeight;
     private final float radius;
     private final float angle;
     private float x, y;
     private float dx, dy;
 
-    private final long createdOn;
-    private int frameIndex;
-    private static Bitmap bitmap;
-    private static float FRAME_RATE = 8.5f;
+    private static AnimationGameBitmap bitmap;
+    private static float FRAME_RATE = 50f;
 
 //    Paint paint = new Paint();
 
@@ -45,15 +42,8 @@ public class Bullet implements GameObject {
 //        paint.setColor(0xFFFF0000);
 
         if (bitmap == null) {
-            Resources res = GameView.view.getResources();
-
-            BitmapFactory.Options opts = new BitmapFactory.Options();
-            opts.inScaled = false;
-            bitmap = BitmapFactory.decodeResource(res, R.mipmap.laser_light, opts);
-            imageWidth = bitmap.getWidth();
-            imageHeight = bitmap.getHeight();
+            bitmap = new AnimationGameBitmap(R.mipmap.laser_light, FRAME_RATE, 10);
         }
-        createdOn = System.currentTimeMillis();
     }
 
     public void update() {
@@ -62,40 +52,27 @@ public class Bullet implements GameObject {
         this.y += this.dy * game.frameTime;
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
-        int frameWidth = w / 10;
+        int frameWidth = bitmap.getWidth();
+        int frameHeight = bitmap.getHeight();
         boolean toBeDeleted = false;
         if (x < 0 || x > w - frameWidth) {
             toBeDeleted = true;
         }
-        if (y < 0 || y > h - imageHeight) {
+        if (y < 0 || y > h - frameHeight) {
             toBeDeleted = true;
         }
         if (toBeDeleted) {
             game.remove(this);
         }
 
-        int elapsed = (int)(System.currentTimeMillis() - createdOn);
-        frameIndex = Math.round(elapsed * 0.001f * FRAME_RATE) % 10;
+        bitmap.update();
     }
 
     public void draw(Canvas canvas) {
-//        canvas.drawCircle(x, y, radius, paint);
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
-        int fw = w / 10;
-//        Log.d(TAG, "image width=" + w);
-//        int fw = h;
-//        int ballRadius = 400;
-        int hw = 50;
-        int hh = 124;
-        Rect src = new Rect(fw * frameIndex, 0, fw * frameIndex + fw, h);
-        RectF dst = new RectF(x - hw, y - hh, x + hw, y + hh);
-
-
         float degree = (float) (angle * 180 / Math.PI) + 90;
         canvas.save();
         canvas.rotate(degree, x, y);
-        canvas.drawBitmap(bitmap, src, dst, null);
+        bitmap.draw(canvas, x, y);
         canvas.restore();
     }
 }

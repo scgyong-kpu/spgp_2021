@@ -7,12 +7,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.samplegame.R;
 import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
 import kr.ac.kpu.game.s1234567.samplegame.ui.view.GameView;
 
 public class Bullet implements GameObject {
+    private static final String TAG = Bullet.class.getSimpleName();
     private static int imageWidth;
     private static int imageHeight;
     private final float radius;
@@ -78,9 +80,10 @@ public class Bullet implements GameObject {
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
         int fw = w / 10;
+        Log.d(TAG, "image width=" + w);
 //        int fw = h;
 //        int ballRadius = 400;
-        int hw = 100;
+        int hw = 50;
         int hh = 124;
         Rect src = new Rect(fw * frameIndex, 0, fw * frameIndex + fw, h);
         RectF dst = new RectF(x - hw, y - hh, x + hw, y + hh);

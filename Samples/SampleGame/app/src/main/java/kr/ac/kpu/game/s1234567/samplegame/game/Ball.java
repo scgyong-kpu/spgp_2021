@@ -45,7 +45,7 @@ public class Ball implements GameObject {
             dy = -dy;
         }
 
-        bitmap.update();
+        //bitmap.update();
     }
 
     public void draw(Canvas canvas) {

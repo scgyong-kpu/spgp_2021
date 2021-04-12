@@ -65,7 +65,7 @@ public class Bullet implements GameObject {
             game.remove(this);
         }
 
-        bitmap.update();
+        //bitmap.update();
     }
 
     public void draw(Canvas canvas) {

@@ -38,12 +38,15 @@ public class AnimationGameBitmap extends GameBitmap {
         frameIndex = 0;
     }
 
-    public void update() {
-        int elapsed = (int)(System.currentTimeMillis() - createdOn);
-        frameIndex = Math.round(elapsed * 0.001f * framesPerSecond) % frameCount;
-    }
+//    public void update() {
+//        int elapsed = (int)(System.currentTimeMillis() - createdOn);
+//        frameIndex = Math.round(elapsed * 0.001f * framesPerSecond) % frameCount;
+//    }
 
     public void draw(Canvas canvas, float x, float y) {
+        int elapsed = (int)(System.currentTimeMillis() - createdOn);
+        frameIndex = Math.round(elapsed * 0.001f * framesPerSecond) % frameCount;
+
         int fw = frameWidth;
         int h = imageHeight;
         int hw = fw / 2 * PIXEL_MULTIPLIER;

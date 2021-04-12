@@ -38,7 +38,7 @@ public class Bullet implements GameObject {
         float delta_x = tx - this.x;
         float delta_y = ty - this.y;
         angle = (float) Math.atan2(delta_y, delta_x);
-        float move_dist = 100;
+        float move_dist = 500;
         this.dx = (float) (move_dist * Math.cos(angle));
         this.dy = (float) (move_dist * Math.sin(angle));
 
@@ -46,7 +46,10 @@ public class Bullet implements GameObject {
 
         if (bitmap == null) {
             Resources res = GameView.view.getResources();
-            bitmap = BitmapFactory.decodeResource(res, R.mipmap.laser_light);
+
+            BitmapFactory.Options opts = new BitmapFactory.Options();
+            opts.inScaled = false;
+            bitmap = BitmapFactory.decodeResource(res, R.mipmap.laser_light, opts);
             imageWidth = bitmap.getWidth();
             imageHeight = bitmap.getHeight();
         }
@@ -80,7 +83,7 @@ public class Bullet implements GameObject {
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
         int fw = w / 10;
-        Log.d(TAG, "image width=" + w);
+//        Log.d(TAG, "image width=" + w);
 //        int fw = h;
 //        int ballRadius = 400;
         int hw = 50;

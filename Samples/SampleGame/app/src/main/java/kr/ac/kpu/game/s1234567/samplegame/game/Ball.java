@@ -6,18 +6,22 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
 import kr.ac.kpu.game.s1234567.samplegame.R;
 import kr.ac.kpu.game.s1234567.samplegame.ui.view.GameView;
 
 public class Ball implements GameObject {
+    private static final String TAG = Ball.class.getSimpleName();
     private static int imageWidth;
     private static int imageHeight;
+    private final long createdOn;
     private float x, y;
     private float dx, dy;
     private int frameIndex;
     private static Bitmap bitmap;
+    private static float FRAME_RATE = 8.5f;
 
     public Ball(float x, float y, float dx, float dy) {
         this.x = x;
@@ -30,6 +34,7 @@ public class Ball implements GameObject {
             imageWidth = bitmap.getWidth();
             imageHeight = bitmap.getHeight();
         }
+        createdOn = System.currentTimeMillis();
     }
 
     public void update() {
@@ -46,7 +51,10 @@ public class Ball implements GameObject {
             dy = -dy;
         }
 
-        frameIndex = (frameIndex + 1) % 24;
+        int elapsed = (int)(System.currentTimeMillis() - createdOn);
+        frameIndex = Math.round(elapsed * 0.001f * FRAME_RATE) % 24;
+//        Log.d(TAG, "frameIndex=" + frameIndex);
+//        frameIndex = (frameIndex + 1) % 24;
     }
 
     public void draw(Canvas canvas) {
@@ -54,7 +62,7 @@ public class Ball implements GameObject {
         int h = bitmap.getHeight();
 //        int fw = w / 24;
         int fw = h;
-        int ballRadius = 100;
+        int ballRadius = 400;
         Rect src = new Rect(fw * frameIndex, 0, fw * frameIndex + fw, h);
         RectF dst = new RectF(x - ballRadius, y - ballRadius, x + ballRadius, y + ballRadius);
         canvas.drawBitmap(bitmap, src, dst, null);

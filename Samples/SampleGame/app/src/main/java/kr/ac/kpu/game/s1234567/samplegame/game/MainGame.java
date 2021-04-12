@@ -11,7 +11,7 @@ import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
 import kr.ac.kpu.game.s1234567.samplegame.ui.view.GameView;
 
 public class MainGame {
-    private static final int BALL_COUNT = 10;
+    private static final int BALL_COUNT = 1;
     private static final String TAG = MainGame.class.getSimpleName();
     // singleton
     private static MainGame instance;

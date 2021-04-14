@@ -22,7 +22,7 @@ public class Bullet implements GameObject {
     private float dx, dy;
 
     private static AnimationGameBitmap bitmap;
-    private static float FRAME_RATE = 50f;
+    private static float FRAME_RATE = 6.7f;
 
 //    Paint paint = new Paint();
 
@@ -42,7 +42,7 @@ public class Bullet implements GameObject {
 //        paint.setColor(0xFFFF0000);
 
         if (bitmap == null) {
-            bitmap = new AnimationGameBitmap(R.mipmap.laser_light, FRAME_RATE, 10);
+            bitmap = new AnimationGameBitmap(R.mipmap.bullet_hadoken, FRAME_RATE, 6);
         }
     }
 

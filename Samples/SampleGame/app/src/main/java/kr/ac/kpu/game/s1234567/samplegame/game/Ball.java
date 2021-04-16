@@ -8,6 +8,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
+import java.util.Random;
+
 import kr.ac.kpu.game.s1234567.samplegame.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
 import kr.ac.kpu.game.s1234567.samplegame.R;
@@ -17,7 +19,7 @@ public class Ball implements GameObject {
     private static final String TAG = Ball.class.getSimpleName();
     private float x, y;
     private float dx, dy;
-    private static AnimationGameBitmap bitmap;
+    private AnimationGameBitmap bitmap;
     private static float FRAME_RATE = 8.5f;
 
     public Ball(float x, float y, float dx, float dy) {
@@ -25,9 +27,9 @@ public class Ball implements GameObject {
         this.y = y;
         this.dx = dx;
         this.dy = dy;
-        if (bitmap == null) {
-            bitmap = new AnimationGameBitmap(R.mipmap.fireball_128_24f, FRAME_RATE, 0);
-        }
+        Random r = new Random();
+        float frameRate = FRAME_RATE * (r.nextFloat() * 0.4f + 0.8f);
+        bitmap = new AnimationGameBitmap(R.mipmap.fireball_128_24f, frameRate, 0);
     }
 
     public void update() {

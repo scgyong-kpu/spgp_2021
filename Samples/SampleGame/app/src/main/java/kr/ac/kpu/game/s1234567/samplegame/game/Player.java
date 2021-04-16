@@ -9,13 +9,13 @@ import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.samplegame.R;
 import kr.ac.kpu.game.s1234567.samplegame.framework.GameObject;
+import kr.ac.kpu.game.s1234567.samplegame.framework.Sound;
 import kr.ac.kpu.game.s1234567.samplegame.ui.view.GameView;
 
 public class Player implements GameObject {
     private static final String TAG = Player.class.getSimpleName();
     private static int imageWidth;
     private static int imageHeight;
-    private final MediaPlayer mediaPlayer;
     private float x, y;
     private float dx, dy;
     private float tx, ty;
@@ -37,12 +37,10 @@ public class Player implements GameObject {
             imageWidth = bitmap.getWidth();
             imageHeight = bitmap.getHeight();
         }
-        mediaPlayer = MediaPlayer.create(GameView.view.getContext(), R.raw.hadouken);
     }
 
     public void moveTo(float x, float y) {
-        mediaPlayer.seekTo(0);
-        mediaPlayer.start();
+        Sound.play(R.raw.hadouken);
         Bullet bullet = new Bullet(this.x, this.y, x, y);
         MainGame game = MainGame.get();
         game.add(bullet);

@@ -23,17 +23,8 @@ public class AnimationGameBitmap extends GameBitmap {
     private final float framesPerSecond;
     private final int frameCount;
 
-    private HashMap<Integer, Bitmap> bitmaps = new HashMap<Integer, Bitmap>();
-
     public AnimationGameBitmap(int resId, float framesPerSecond, int frameCount) {
-        bitmap = bitmaps.get(resId);
-        if (bitmap == null) {
-            Resources res = GameView.view.getResources();
-            BitmapFactory.Options opts = new BitmapFactory.Options();
-            opts.inScaled = false;
-            bitmap = BitmapFactory.decodeResource(res, resId, opts);
-            bitmaps.put(resId, bitmap);
-        }
+        bitmap = GameBitmap.load(resId);
         imageWidth = bitmap.getWidth();
         imageHeight = bitmap.getHeight();
         if (frameCount == 0) {
@@ -46,7 +37,7 @@ public class AnimationGameBitmap extends GameBitmap {
         frameIndex = 0;
     }
 
-//    public void update() {
+    //    public void update() {
 //        int elapsed = (int)(System.currentTimeMillis() - createdOn);
 //        frameIndex = Math.round(elapsed * 0.001f * framesPerSecond) % frameCount;
 //    }

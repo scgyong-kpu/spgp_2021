@@ -9,7 +9,6 @@ import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 
 public class MainGame {
-    private static final int BALL_COUNT = 10;
     private static final String TAG = MainGame.class.getSimpleName();
     // singleton
     private static MainGame instance;
@@ -33,17 +32,6 @@ public class MainGame {
         }
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
-//        player = new Player(w/2, h/2, 0, 0);
-//        Random rand = new Random();
-//        for (int i = 0; i < BALL_COUNT; i++) {
-//            float x = rand.nextInt(1000);
-//            float y = rand.nextInt(1000);
-//            float dx = rand.nextFloat() * 1000 - 500;
-//            float dy = rand.nextFloat() * 1000 - 500;
-//            Ball b = new Ball(x, y, dx, dy);
-//            objects.add(b);
-//        }
-//        objects.add(player);
 
         player = new Player(w/2, h - 300, 0, 0);
         objects.add(player);

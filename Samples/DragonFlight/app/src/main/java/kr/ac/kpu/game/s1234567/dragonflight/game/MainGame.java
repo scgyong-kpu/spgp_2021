@@ -13,6 +13,8 @@ public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
     // singleton
     private static MainGame instance;
+    private Player player;
+
     public static MainGame get() {
         if (instance == null) {
             instance = new MainGame();
@@ -42,6 +44,9 @@ public class MainGame {
 //            objects.add(b);
 //        }
 //        objects.add(player);
+
+        player = new Player(w/2, h - 300, 0, 0);
+        objects.add(player);
 
         initialized = true;
         return true;

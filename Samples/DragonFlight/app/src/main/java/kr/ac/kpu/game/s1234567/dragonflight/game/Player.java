@@ -28,7 +28,7 @@ public class Player implements GameObject {
         this.y = y;
         this.dx = dx;
         this.dy = dy;
-        this.tx = 0;
+        this.tx = x;
         this.ty = 0;
         this.speed = 800;
         this.bitmap = GameBitmap.load(R.mipmap.plane_240);
@@ -37,12 +37,18 @@ public class Player implements GameObject {
     }
 
     public void moveTo(float x, float y) {
+        this.tx = x;
+        //this.ty = this.y;
+//        this.ty = y;
+//        MainGame game = MainGame.get();
+//        float move_dist = speed * game.frameTime;
+//        this.dx = (float) (move_dist * Math.cos(angle));
+//        this.dy = (float) (move_dist * Math.sin(angle));
+
 //        Sound.play(R.raw.hadouken);
 //        Bullet bullet = new Bullet(this.x, this.y, x, y);
 //        MainGame game = MainGame.get();
 //        game.add(bullet);
-////        this.tx = x;
-////        this.ty = y;
 //        float delta_x = x - this.x;
 //        float delta_y = y - this.y;
 //        this.angle = (float) Math.atan2(delta_y, delta_x);
@@ -54,14 +60,19 @@ public class Player implements GameObject {
     }
 
     public void update() {
+        MainGame game = MainGame.get();
+        float dx = speed * game.frameTime;
+        if (tx < x) { // move left
+            dx = -dx;
+        }
         x += dx;
         if ((dx > 0 && x > tx) || (dx < 0 && x < tx)) {
             x = tx;
         }
-        y += dy;
-        if ((dy > 0 && y > ty) || (dy < 0 && y < ty)) {
-            y = ty;
-        }
+//        y += dy;
+//        if ((dy > 0 && y > ty) || (dy < 0 && y < ty)) {
+//            y = ty;
+//        }
     }
 
     public void draw(Canvas canvas) {

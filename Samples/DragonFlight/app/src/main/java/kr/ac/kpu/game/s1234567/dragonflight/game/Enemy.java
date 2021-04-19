@@ -6,6 +6,7 @@ import kr.ac.kpu.game.s1234567.dragonflight.R;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.AnimationGameBitmap;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 
 public class Enemy implements GameObject {
     private static final float FRAMES_PER_SECOND = 8.0f;
@@ -27,7 +28,7 @@ public class Enemy implements GameObject {
         MainGame game = MainGame.get();
         y += speed * game.frameTime;
 
-        if (y < 0) {
+        if (y > GameView.view.getHeight()) {
             game.remove(this);
         }
     }

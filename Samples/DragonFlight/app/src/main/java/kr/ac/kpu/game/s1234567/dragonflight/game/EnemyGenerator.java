@@ -28,6 +28,9 @@ public class EnemyGenerator implements GameObject {
 
     private void generate() {
         Log.d(TAG, "Generate now !!");
+        Enemy enemy = new Enemy(500, 0, 700);
+        MainGame game = MainGame.get();
+        game.add(enemy);
     }
 
     @Override

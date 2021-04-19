@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 
 public class EnemyGenerator implements GameObject {
 
@@ -27,10 +28,15 @@ public class EnemyGenerator implements GameObject {
     }
 
     private void generate() {
-        Log.d(TAG, "Generate now !!");
-        Enemy enemy = new Enemy(500, 0, 700);
+        //Log.d(TAG, "Generate now !!");
         MainGame game = MainGame.get();
-        game.add(enemy);
+        int sixth = GameView.view.getWidth() / 6;
+        for (int i = 1; i <= 5; i++) {
+            int x = sixth * i;
+            int y = 0;
+            Enemy enemy = new Enemy(x, y, 700);
+            game.add(enemy);
+        }
     }
 
     @Override

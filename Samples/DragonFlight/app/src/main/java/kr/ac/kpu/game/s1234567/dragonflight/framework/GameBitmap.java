@@ -26,6 +26,7 @@ public class GameBitmap {
     }
 
     private final Bitmap bitmap;
+    protected RectF dstRect = new RectF();
     public GameBitmap(int resId) {
         bitmap = load(resId);
     }
@@ -38,7 +39,7 @@ public class GameBitmap {
         float dt = y - hh * GameView.MULTIPLIER;
         float dr = x + hw * GameView.MULTIPLIER;
         float db = y + hh * GameView.MULTIPLIER;
-        RectF dstRect = new RectF(dl, dt, dr, db);
+        dstRect.set(dl, dt, dr, db);
         canvas.drawBitmap(bitmap, null, dstRect, null);
     }
 

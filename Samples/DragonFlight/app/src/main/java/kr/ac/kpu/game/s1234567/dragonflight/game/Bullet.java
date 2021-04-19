@@ -24,6 +24,10 @@ public class Bullet implements GameObject {
     public void update() {
         MainGame game = MainGame.get();
         y -= speed * game.frameTime;
+
+        if (y < 0) {
+            game.remove(this);
+        }
     }
 
     @Override

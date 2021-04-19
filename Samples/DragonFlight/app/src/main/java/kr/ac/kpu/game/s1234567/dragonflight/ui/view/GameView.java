@@ -16,6 +16,7 @@ import kr.ac.kpu.game.s1234567.dragonflight.game.MainGame;
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();
 
+    public static final float MULTIPLIER = 2;
     //    private Ball b1, b2;
 
     private long lastFrame;

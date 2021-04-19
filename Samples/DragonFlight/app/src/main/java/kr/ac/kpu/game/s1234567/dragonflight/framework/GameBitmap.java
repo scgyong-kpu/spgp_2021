@@ -3,6 +3,8 @@ package kr.ac.kpu.game.s1234567.dragonflight.framework;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.RectF;
 
 import java.util.HashMap;
 
@@ -21,5 +23,30 @@ public class GameBitmap {
             bitmaps.put(resId, bitmap);
         }
         return bitmap;
+    }
+
+    private final Bitmap bitmap;
+    public GameBitmap(int resId) {
+        bitmap = load(resId);
+    }
+
+    public void draw(Canvas canvas, float x, float y) {
+        int hw = getWidth() / 2;
+        int hh = getHeight() / 2;
+        //Rect srcRect = new Rect(left, )
+        float dl = x - hw * GameView.MULTIPLIER;
+        float dt = y - hh * GameView.MULTIPLIER;
+        float dr = x + hw * GameView.MULTIPLIER;
+        float db = y + hh * GameView.MULTIPLIER;
+        RectF dstRect = new RectF(dl, dt, dr, db);
+        canvas.drawBitmap(bitmap, null, dstRect, null);
+    }
+
+    private int getHeight() {
+        return bitmap.getHeight();
+    }
+
+    private int getWidth() {
+        return bitmap.getWidth();
     }
 }

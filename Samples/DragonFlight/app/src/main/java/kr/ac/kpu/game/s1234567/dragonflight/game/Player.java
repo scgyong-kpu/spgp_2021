@@ -17,12 +17,10 @@ import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 public class Player implements GameObject {
     private static final String TAG = Player.class.getSimpleName();
     private static final int BULLET_SPEED = 1500;
-    private int imageWidth;
-    private int imageHeight;
     private float x, y;
     private float tx, ty;
     private float speed;
-    private Bitmap bitmap;
+    private GameBitmap bitmap;
 
     public Player(float x, float y) {
         this.x = x;
@@ -30,9 +28,7 @@ public class Player implements GameObject {
         this.tx = x;
         this.ty = 0;
         this.speed = 800;
-        this.bitmap = GameBitmap.load(R.mipmap.fighter);
-        imageWidth = bitmap.getWidth();
-        imageHeight = bitmap.getHeight();
+        this.bitmap = new GameBitmap(R.mipmap.fighter);
     }
 
     public void moveTo(float x, float y) {
@@ -56,17 +52,6 @@ public class Player implements GameObject {
     }
 
     public void draw(Canvas canvas) {
-        float sr = x - imageWidth / 2;
-        float st = y - imageHeight / 2;
-
-        int hw = imageWidth / 2;
-        int hh = imageHeight / 2;
-        //Rect srcRect = new Rect(left, )
-        float dl = x - hw * GameView.MULTIPLIER;
-        float dt = y - hh * GameView.MULTIPLIER;
-        float dr = x + hw * GameView.MULTIPLIER;
-        float db = y + hh * GameView.MULTIPLIER;
-        RectF dstRect = new RectF(dl, dt, dr, db);
-        canvas.drawBitmap(bitmap, null, dstRect, null);
+        bitmap.draw(canvas, x, y);
     }
 }

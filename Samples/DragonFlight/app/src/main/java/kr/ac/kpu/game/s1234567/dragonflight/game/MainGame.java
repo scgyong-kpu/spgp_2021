@@ -65,7 +65,12 @@ public class MainGame {
     }
 
     public void add(GameObject gameObject) {
-        objects.add(gameObject);
+        GameView.view.post(new Runnable() {
+            @Override
+            public void run() {
+                objects.add(gameObject);
+            }
+        });
 //        Log.d(TAG, "<A> object count = " + objects.size());
     }
 

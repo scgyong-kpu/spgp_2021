@@ -7,8 +7,9 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
+
 public class AnimationGameBitmap extends GameBitmap {
-    private static final int PIXEL_MULTIPLIER = 4;
     private Bitmap bitmap;
     private final int imageWidth;
     private final int imageHeight;
@@ -44,19 +45,19 @@ public class AnimationGameBitmap extends GameBitmap {
 
         int fw = frameWidth;
         int h = imageHeight;
-        int hw = fw / 2 * PIXEL_MULTIPLIER;
-        int hh = h / 2 * PIXEL_MULTIPLIER;
+        float hw = fw / 2 * GameView.MULTIPLIER;
+        float hh = h / 2 * GameView.MULTIPLIER;
         Rect src = new Rect(fw * frameIndex, 0, fw * frameIndex + fw, h);
         RectF dst = new RectF(x - hw, y - hh, x + hw, y + hh);
         canvas.drawBitmap(bitmap, src, dst, null);
     }
 
     public int getWidth() {
-        return frameWidth * PIXEL_MULTIPLIER;
+        return frameWidth;
     }
 
     public int getHeight() {
-        return imageHeight * PIXEL_MULTIPLIER;
+        return imageHeight;
     }
 }
 

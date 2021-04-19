@@ -42,11 +42,11 @@ public class GameBitmap {
         canvas.drawBitmap(bitmap, null, dstRect, null);
     }
 
-    private int getHeight() {
+    public int getHeight() {
         return bitmap.getHeight();
     }
 
-    private int getWidth() {
+    public int getWidth() {
         return bitmap.getWidth();
     }
 }

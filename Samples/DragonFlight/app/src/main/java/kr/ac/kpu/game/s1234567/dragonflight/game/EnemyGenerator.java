@@ -30,9 +30,9 @@ public class EnemyGenerator implements GameObject {
     private void generate() {
         //Log.d(TAG, "Generate now !!");
         MainGame game = MainGame.get();
-        int sixth = GameView.view.getWidth() / 6;
-        for (int i = 1; i <= 5; i++) {
-            int x = sixth * i;
+        int tenth = GameView.view.getWidth() / 10;
+        for (int i = 1; i <= 9; i += 2) {
+            int x = tenth * i;
             int y = 0;
             Enemy enemy = new Enemy(x, y, 700);
             game.add(enemy);

@@ -36,6 +36,8 @@ public class MainGame {
         player = new Player(w/2, h - 300);
         objects.add(player);
 
+        objects.add(new EnemyGenerator());
+
         initialized = true;
         return true;
     }

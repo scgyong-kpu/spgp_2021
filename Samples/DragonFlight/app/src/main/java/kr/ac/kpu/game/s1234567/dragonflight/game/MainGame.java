@@ -33,7 +33,7 @@ public class MainGame {
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
 
-        player = new Player(w/2, h - 300, 0, 0);
+        player = new Player(w/2, h - 300);
         objects.add(player);
 
         initialized = true;

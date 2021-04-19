@@ -4,6 +4,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.dragonflight.R;
@@ -27,7 +29,7 @@ public class Player implements GameObject {
         this.tx = x;
         this.ty = 0;
         this.speed = 800;
-        this.bitmap = GameBitmap.load(R.mipmap.plane_240);
+        this.bitmap = GameBitmap.load(R.mipmap.fighter);
         imageWidth = bitmap.getWidth();
         imageHeight = bitmap.getHeight();
     }
@@ -50,8 +52,18 @@ public class Player implements GameObject {
     }
 
     public void draw(Canvas canvas) {
-        float left = x - imageWidth / 2;
-        float top = y - imageHeight / 2;
-        canvas.drawBitmap(bitmap, left, top, null);
+        float sr = x - imageWidth / 2;
+        float st = y - imageHeight / 2;
+
+        final int MULTIPLIER = 2;
+        int hw = imageWidth / 2;
+        int hh = imageHeight / 2;
+        //Rect srcRect = new Rect(left, )
+        float dl = x - hw * MULTIPLIER;
+        float dt = y - hh * MULTIPLIER;
+        float dr = x + hw * MULTIPLIER;
+        float db = y + hh * MULTIPLIER;
+        RectF dstRect = new RectF(dl, dt, dr, db);
+        canvas.drawBitmap(bitmap, null, dstRect, null);
     }
 }

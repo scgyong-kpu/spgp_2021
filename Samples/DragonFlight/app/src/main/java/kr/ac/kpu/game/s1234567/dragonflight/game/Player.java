@@ -9,12 +9,13 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.dragonflight.R;
+import kr.ac.kpu.game.s1234567.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.Sound;
 import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 
-public class Player implements GameObject {
+public class Player implements GameObject, BoxCollidable {
     private static final String TAG = Player.class.getSimpleName();
     private static final int BULLET_SPEED = 1500;
     private static final float FIRE_INTERVAL = 1.0f / 7.5f;
@@ -65,5 +66,10 @@ public class Player implements GameObject {
 
     public void draw(Canvas canvas) {
         bitmap.draw(canvas, x, y);
+    }
+
+    @Override
+    public RectF getBoundingRect() {
+        return bitmap.getBoundingRect(x, y);
     }
 }

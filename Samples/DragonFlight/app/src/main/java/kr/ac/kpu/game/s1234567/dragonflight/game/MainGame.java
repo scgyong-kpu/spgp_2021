@@ -1,12 +1,15 @@
 package kr.ac.kpu.game.s1234567.dragonflight.game;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import kr.ac.kpu.game.s1234567.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
+import kr.ac.kpu.game.s1234567.dragonflight.utils.CollisionHelper;
 
 public class MainGame {
     private static final String TAG = MainGame.class.getSimpleName();
@@ -46,6 +49,21 @@ public class MainGame {
         //if (!initialized) return;
         for (GameObject o : objects) {
             o.update();
+        }
+
+        for (GameObject o1 : objects) {
+            if (!(o1 instanceof Enemy)) {
+                continue;
+            }
+            for (GameObject o2 : objects) {
+                if (!(o2 instanceof Bullet || o2 instanceof Player)) {
+                    continue;
+                }
+
+                if (CollisionHelper.collides((BoxCollidable)o1, (BoxCollidable)o2)) {
+                    Log.d(TAG, "Collision!" + o1 + " - " + o2);
+                }
+            }
         }
     }
 

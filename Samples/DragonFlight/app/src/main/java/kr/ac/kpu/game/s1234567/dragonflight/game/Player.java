@@ -59,7 +59,7 @@ public class Player implements GameObject, BoxCollidable {
     }
 
     private void fireBullet() {
-        Bullet bullet = new Bullet(this.x, this.y, BULLET_SPEED);
+        Bullet bullet = Bullet.get(this.x, this.y, BULLET_SPEED);
         MainGame game = MainGame.get();
         game.add(bullet);
     }

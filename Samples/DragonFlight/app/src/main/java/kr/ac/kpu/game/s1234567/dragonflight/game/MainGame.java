@@ -62,7 +62,7 @@ public class MainGame {
                 }
 
                 if (CollisionHelper.collides((BoxCollidable)o1, (BoxCollidable)o2)) {
-                    Log.d(TAG, "Collision!" + o1 + " - " + o2);
+                    //Log.d(TAG, "Collision!" + o1 + " - " + o2);
                     remove(o1);
                     remove(o2);
                     removed = true;

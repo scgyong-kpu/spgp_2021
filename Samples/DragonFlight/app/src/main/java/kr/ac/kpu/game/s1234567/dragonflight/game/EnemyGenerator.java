@@ -3,6 +3,8 @@ package kr.ac.kpu.game.s1234567.dragonflight.game;
 import android.graphics.Canvas;
 import android.util.Log;
 
+import java.util.Random;
+
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 
@@ -14,7 +16,7 @@ public class EnemyGenerator implements GameObject {
     private float spawnInterval;
 
     public EnemyGenerator() {
-        time = 0.0f;
+        time = INITIAL_SPAWN_INTERVAL;
         spawnInterval = INITIAL_SPAWN_INTERVAL;
     }
     @Override
@@ -31,10 +33,12 @@ public class EnemyGenerator implements GameObject {
         //Log.d(TAG, "Generate now !!");
         MainGame game = MainGame.get();
         int tenth = GameView.view.getWidth() / 10;
+        Random r = new Random();
         for (int i = 1; i <= 9; i += 2) {
             int x = tenth * i;
             int y = 0;
-            Enemy enemy = new Enemy(x, y, 700);
+            int level = r.nextInt(20) + 1;
+            Enemy enemy = new Enemy(level, x, y, 700);
             game.add(enemy);
         }
     }

@@ -7,7 +7,6 @@ import kr.ac.kpu.game.s1234567.dragonflight.R;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
-import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 
 public class Bullet implements GameObject, BoxCollidable {
     private final float x;
@@ -39,7 +38,7 @@ public class Bullet implements GameObject, BoxCollidable {
     }
 
     @Override
-    public RectF getBoundingRect() {
-        return bitmap.getBoundingRect(x, y);
+    public void getBoundingRect(RectF rect) {
+        bitmap.getBoundingRect(x, y, rect);
     }
 }

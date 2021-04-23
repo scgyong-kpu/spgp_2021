@@ -10,8 +10,9 @@ import kr.ac.kpu.game.s1234567.dragonflight.R;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s1234567.dragonflight.framework.Recyclable;
 
-public class Bullet implements GameObject, BoxCollidable {
+public class Bullet implements GameObject, BoxCollidable, Recyclable {
     private static final String TAG = Bullet.class.getSimpleName();
     private float x;
     private final GameBitmap bitmap;
@@ -27,12 +28,13 @@ public class Bullet implements GameObject, BoxCollidable {
         this.bitmap = new GameBitmap(R.mipmap.laser_1);
     }
 
-    private static ArrayList<Bullet> recycleBin = new ArrayList<>();
+//    private static ArrayList<Bullet> recycleBin = new ArrayList<>();
     public static Bullet get(float x, float y, int speed) {
-        if (recycleBin.isEmpty()) {
+        MainGame game = MainGame.get();
+        Bullet bullet = (Bullet) game.get(Bullet.class);
+        if (bullet == null) {
             return new Bullet(x, y, speed);
         }
-        Bullet bullet = recycleBin.remove(0);
         bullet.init(x, y, speed);
         return bullet;
     }
@@ -64,7 +66,8 @@ public class Bullet implements GameObject, BoxCollidable {
         bitmap.getBoundingRect(x, y, rect);
     }
 
+    @Override
     public void recycle() {
-        recycleBin.add(this);
+        // 재활용통에 들어가는 시점에 불리는 함수. 현재는 할일없음.
     }
 }

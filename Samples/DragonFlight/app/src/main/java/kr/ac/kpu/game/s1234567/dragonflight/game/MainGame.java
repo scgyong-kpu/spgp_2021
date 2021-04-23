@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.ac.kpu.game.s1234567.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s1234567.dragonflight.framework.Recyclable;
 import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 import kr.ac.kpu.game.s1234567.dragonflight.utils.CollisionHelper;
 
@@ -28,6 +30,22 @@ public class MainGame {
 
 //    Player player;
     ArrayList<GameObject> objects = new ArrayList<>();
+    private static HashMap<Class, ArrayList<GameObject>> recycleBin = new HashMap<>();
+
+    public void recycle(GameObject object) {
+        Class clazz = object.getClass();
+        ArrayList<GameObject> array = recycleBin.get(clazz);
+        if (array == null) {
+            array = new ArrayList<>();
+            recycleBin.put(clazz, array);
+        }
+        array.add(object);
+    }
+    public GameObject get(Class clazz) {
+        ArrayList<GameObject> array = recycleBin.get(clazz);
+        if (array == null || array.isEmpty()) return null;
+        return array.remove(0);
+    }
 
     public boolean initResources() {
         if (initialized) {
@@ -67,7 +85,8 @@ public class MainGame {
                     //Log.d(TAG, "Collision!" + o1 + " - " + o2);
                     remove(enemy);
                     remove(bullet);
-                    bullet.recycle();
+                    //bullet.recycle();
+                    //recycle(bullet);
                     removed = true;
                     break;
                 }
@@ -109,6 +128,10 @@ public class MainGame {
     }
 
     public void remove(GameObject gameObject) {
+        if (gameObject instanceof Recyclable) {
+            ((Recyclable) gameObject).recycle();
+            recycle(gameObject);
+        }
         GameView.view.post(new Runnable() {
             @Override
             public void run() {

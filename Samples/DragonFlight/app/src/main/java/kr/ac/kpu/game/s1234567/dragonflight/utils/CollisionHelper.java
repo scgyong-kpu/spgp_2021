@@ -1,11 +1,13 @@
 package kr.ac.kpu.game.s1234567.dragonflight.utils;
 
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
 
 public class CollisionHelper {
+    private static final String TAG = CollisionHelper.class.getSimpleName();
     private static RectF rect1 = new RectF();
     private static RectF rect2 = new RectF();
     public static boolean collides(BoxCollidable o1, BoxCollidable o2) {
@@ -17,6 +19,7 @@ public class CollisionHelper {
         if (rect1.right < rect2.left) return false;
         if (rect1.bottom < rect2.top) return false;
 
+        Log.d(TAG, "1:" + rect1 + " 2:" + rect2);
         return true;
     }
 }

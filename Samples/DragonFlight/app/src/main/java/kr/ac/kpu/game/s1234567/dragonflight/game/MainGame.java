@@ -55,14 +55,25 @@ public class MainGame {
             if (!(o1 instanceof Enemy)) {
                 continue;
             }
+            boolean removed = false;
             for (GameObject o2 : objects) {
-                if (!(o2 instanceof Bullet || o2 instanceof Player)) {
+                if (!(o2 instanceof Bullet)) {
                     continue;
                 }
 
                 if (CollisionHelper.collides((BoxCollidable)o1, (BoxCollidable)o2)) {
                     Log.d(TAG, "Collision!" + o1 + " - " + o2);
+                    remove(o1);
+                    remove(o2);
+                    removed = true;
+                    break;
                 }
+            }
+            if (removed) {
+                continue;
+            }
+            if (CollisionHelper.collides((BoxCollidable)o1, player)) {
+                Log.d(TAG, "Collision: Enemy - Player");
             }
         }
     }

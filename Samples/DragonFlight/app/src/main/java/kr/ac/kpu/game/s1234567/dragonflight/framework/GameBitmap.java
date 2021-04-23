@@ -52,8 +52,8 @@ public class GameBitmap {
     }
 
     public void getBoundingRect(float x, float y, RectF rect) {
-        int hw = bitmap.getWidth() / 2;
-        int hh = bitmap.getHeight() / 2;
+        int hw = getWidth() / 2;
+        int hh = getHeight() / 2;
         //Rect srcRect = new Rect(left, )
         float dl = x - hw * GameView.MULTIPLIER;
         float dt = y - hh * GameView.MULTIPLIER;

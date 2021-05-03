@@ -52,7 +52,6 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
 
         if (y < 0) {
             game.remove(this);
-            recycle();
         }
     }
 

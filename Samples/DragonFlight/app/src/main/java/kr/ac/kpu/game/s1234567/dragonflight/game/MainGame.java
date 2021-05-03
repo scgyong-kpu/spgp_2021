@@ -97,8 +97,8 @@ public class MainGame {
             for (GameObject o2: bullets) {
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
-                    remove(bullet);
-                    remove(enemy);
+                    remove(bullet, false);
+                    remove(enemy, false);
                     score.addScore(10);
                     collided = true;
                     break;
@@ -177,6 +177,9 @@ public class MainGame {
     }
 
     public void remove(GameObject gameObject) {
+        remove(gameObject, true);
+    }
+    public void remove(GameObject gameObject, boolean delayed) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -193,6 +196,10 @@ public class MainGame {
                 }
             }
         };
-        GameView.view.post(runnable);
+        if (delayed) {
+            GameView.view.post(runnable);
+        } else {
+            runnable.run();
+        }
     }
 }

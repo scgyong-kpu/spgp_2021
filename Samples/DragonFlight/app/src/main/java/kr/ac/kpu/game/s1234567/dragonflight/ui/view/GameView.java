@@ -48,6 +48,10 @@ public class GameView extends View {
     }
 
     private void requestCallback() {
+        if (!isShown()) {
+            Log.d(TAG, "Not shown. Not calling Choreographer.postFrameCallback()");
+            return;
+        }
         Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
             @Override
             public void doFrame(long time) {

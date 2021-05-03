@@ -87,12 +87,18 @@ public class MainGame {
         ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
         for (GameObject o1: enemies) {
             Enemy enemy = (Enemy) o1;
+            boolean collided = false;
             for (GameObject o2: bullets) {
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
                     remove(bullet);
                     remove(enemy);
+                    collided = true;
+                    break;
                 }
+            }
+            if (collided) {
+                break;
             }
         }
 //        for (GameObject o1 : objects) {
@@ -140,6 +146,13 @@ public class MainGame {
 //        if (action == MotionEvent.ACTION_DOWN) {
         if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
             player.moveTo(event.getX(), event.getY());
+//            int li = 0;
+//            for (ArrayList<GameObject> objects: layers) {
+//                for (GameObject o : objects) {
+//                    Log.d(TAG, "L:" + li + " " + o);
+//                }
+//                li++;
+//            }
             return true;
         }
         return false;
@@ -167,6 +180,7 @@ public class MainGame {
                 for (ArrayList<GameObject> objects: layers) {
                     boolean removed = objects.remove(gameObject);
                     if (removed) {
+                        //Log.d(TAG, "Removed: " + gameObject);
                         break;
                     }
                 }

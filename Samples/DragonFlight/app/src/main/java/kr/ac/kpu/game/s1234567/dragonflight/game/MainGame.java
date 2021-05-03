@@ -153,13 +153,13 @@ public class MainGame {
 //        if (action == MotionEvent.ACTION_DOWN) {
         if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
             player.moveTo(event.getX(), event.getY());
-            int li = 0;
-            for (ArrayList<GameObject> objects: layers) {
-                for (GameObject o : objects) {
-                    Log.d(TAG, "L:" + li + " " + o);
-                }
-                li++;
-            }
+//            int li = 0;
+//            for (ArrayList<GameObject> objects: layers) {
+//                for (GameObject o : objects) {
+//                    Log.d(TAG, "L:" + li + " " + o);
+//                }
+//                li++;
+//            }
             return true;
         }
         return false;

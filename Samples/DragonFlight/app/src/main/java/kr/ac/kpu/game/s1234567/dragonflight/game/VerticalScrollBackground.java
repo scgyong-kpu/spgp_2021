@@ -12,6 +12,7 @@ import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 public class VerticalScrollBackground implements GameObject {
     private final Bitmap bitmap;
     private final float speed;
+    private float scroll;
 
     private Rect srcRect = new Rect();
     private RectF dstRect = new RectF();
@@ -31,12 +32,24 @@ public class VerticalScrollBackground implements GameObject {
     public void update() {
         MainGame game = MainGame.get();
         float amount = speed * game.frameTime;
-        dstRect.top += amount;
-        dstRect.bottom += amount;
+        scroll += amount;
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, srcRect, dstRect, null);
+        int vw = GameView.view.getWidth();
+        int vh = GameView.view.getHeight();
+        int iw = bitmap.getWidth();
+        int ih = bitmap.getHeight();
+        int dh = vw * ih / iw;
+
+        int curr = (int)scroll % dh;
+        if (curr > 0) curr -= dh;
+
+        while (curr < vh) {
+            dstRect.set(0, curr, vw, curr + dh);
+            canvas.drawBitmap(bitmap, srcRect, dstRect, null);
+            curr += dh;
+        }
     }
 }

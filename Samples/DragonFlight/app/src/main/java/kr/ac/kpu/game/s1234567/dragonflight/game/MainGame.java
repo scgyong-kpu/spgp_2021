@@ -50,7 +50,7 @@ public class MainGame {
     }
 
     public enum Layer {
-        bg, enemy, bullet, player, ui, controller, ENEMY_COUNT
+        bg1, enemy, bullet, player, bg2, ui, controller, ENEMY_COUNT
     }
     public boolean initResources() {
         if (initialized) {
@@ -72,10 +72,10 @@ public class MainGame {
         add(Layer.ui, score);
 
         ImageObject bg = new ImageObject(R.mipmap.bg_city, w / 2, h / 2);
-        add(Layer.bg, bg);
+        add(Layer.bg1, bg);
 
         ImageObject clouds = new ImageObject(R.mipmap.clouds, w / 2, h / 2);
-        add(Layer.bg, clouds);
+        add(Layer.bg2, clouds);
 
         initialized = true;
         return true;

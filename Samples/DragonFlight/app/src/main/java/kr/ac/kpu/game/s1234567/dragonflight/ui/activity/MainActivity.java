@@ -19,7 +19,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        Log.d(TAG, "Density: " + metrics.density + " DPI:" + metrics.densityDpi);
-        GameView.MULTIPLIER = metrics.density;
+        GameView.MULTIPLIER = metrics.density * 0.8f;
+        Log.d(TAG, "Density: " + metrics.density + " DPI:" + metrics.densityDpi + " Multiplier:" + GameView.MULTIPLIER);
+    }
+
+    @Override
+    protected void onPause() {
+        GameView.view.pauseGame();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GameView.view.resumeGame();
     }
 }

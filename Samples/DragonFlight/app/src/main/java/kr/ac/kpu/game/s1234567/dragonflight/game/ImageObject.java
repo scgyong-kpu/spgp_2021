@@ -7,6 +7,7 @@ import android.graphics.RectF;
 
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
+import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 
 public class ImageObject implements GameObject {
     private final Bitmap bitmap;
@@ -18,10 +19,10 @@ public class ImageObject implements GameObject {
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
         srcRect.set(0, 0, w, h);
-        float l = x - w / 2;
-        float t = y - h / 2;
-        float r = x + w / 2;
-        float b = y + h / 2;
+        float l = x - w / 2 * GameView.MULTIPLIER;
+        float t = y - h / 2 * GameView.MULTIPLIER;
+        float r = x + w / 2 * GameView.MULTIPLIER;
+        float b = y + h / 2 * GameView.MULTIPLIER;
         dstRect.set(l, t, r, b);
     }
     @Override

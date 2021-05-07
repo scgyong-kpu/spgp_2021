@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.dragonflight.R;
+import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,5 +20,6 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         Log.d(TAG, "Density: " + metrics.density + " DPI:" + metrics.densityDpi);
+        GameView.MULTIPLIER = metrics.density;
     }
 }

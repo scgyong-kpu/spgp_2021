@@ -3,6 +3,7 @@ package kr.ac.kpu.game.s1234567.dragonflight.ui.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;

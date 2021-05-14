@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
-public class IndexedAnimationGameBitmap extends AnimationGameBitmap {
+public class    IndexedAnimationGameBitmap extends AnimationGameBitmap {
 
     private static final String TAG = IndexedAnimationGameBitmap.class.getSimpleName();
     private final int frameHeight;

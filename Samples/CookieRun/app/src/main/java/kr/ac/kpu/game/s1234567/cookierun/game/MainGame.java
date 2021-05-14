@@ -31,7 +31,7 @@ public class MainGame extends BaseGame {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
-        player = new Player(w/2, h - 300);
+        player = new Player(200, h - 300);
         //layers.get(Layer.player.ordinal()).add(player);
         add(Layer.player, player);
 //        add(Layer.controller, new EnemyGenerator());
@@ -71,7 +71,8 @@ public class MainGame extends BaseGame {
         int action = event.getAction();
 //        if (action == MotionEvent.ACTION_DOWN) {
         if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-            player.moveTo(event.getX(), event.getY());
+//            player.moveTo(event.getX(), event.getY());
+            player.jump();
 //            int li = 0;
 //            for (ArrayList<GameObject> objects: layers) {
 //                for (GameObject o : objects) {

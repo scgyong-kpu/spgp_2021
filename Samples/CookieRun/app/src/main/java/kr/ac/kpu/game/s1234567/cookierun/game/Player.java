@@ -2,6 +2,7 @@ package kr.ac.kpu.game.s1234567.cookierun.game;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.cookierun.R;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
@@ -14,15 +15,25 @@ public class Player implements GameObject, BoxCollidable {
     private static final int BULLET_SPEED = 1500;
     private static final float FIRE_INTERVAL = 1.0f / 7.5f;
     private static final float LASER_DURATION = FIRE_INTERVAL / 3;
+    private static final float GRAVITY = 2500;
+    private static final float JUMP_POWER = 1200;
     private final IndexedAnimationGameBitmap charBitmap;
+    private final float ground_y;
     private float fireTime;
     private float x, y;
     private float tx, ty;
+    private float vertSpeed;
     private float speed;
+
+    private enum State {
+        running, jump, doubleJump, slide, hit
+    }
+    private State state = State.running;
 
     public Player(float x, float y) {
         this.x = x;
         this.y = y;
+        this.ground_y = y;
         this.tx = x;
         this.ty = 0;
         this.speed = 800;
@@ -40,26 +51,17 @@ public class Player implements GameObject, BoxCollidable {
 
     public void update() {
         BaseGame game = BaseGame.get();
-        float dx = speed * game.frameTime;
-        if (tx < x) { // move left
-            dx = -dx;
+        if (state == State.jump) {
+            float y = this.y + vertSpeed * game.frameTime;
+//            charBitmap.move(0, y - this.y);
+            vertSpeed += GRAVITY * game.frameTime;
+            if (y >= ground_y) {
+                y = ground_y;
+                state = State.running;
+                this.charBitmap.setIndices(100, 101, 102, 103);
+            }
+            this.y = y;
         }
-        x += dx;
-        if ((dx > 0 && x > tx) || (dx < 0 && x < tx)) {
-            x = tx;
-        }
-
-        fireTime += game.frameTime;
-        if (fireTime >= FIRE_INTERVAL) {
-            fireBullet();
-            fireTime -= FIRE_INTERVAL;
-        }
-    }
-
-    private void fireBullet() {
-//        Bullet bullet = Bullet.get(this.x, this.y, BULLET_SPEED);
-//        MainGame game = MainGame.get();
-//        game.add(MainGame.Layer.bullet, bullet);
     }
 
     public void draw(Canvas canvas) {
@@ -69,5 +71,16 @@ public class Player implements GameObject, BoxCollidable {
     @Override
     public void getBoundingRect(RectF rect) {
         //planeBitmap.getBoundingRect(x, y, rect);
+    }
+
+    public void jump() {
+        //if (state != State.running && state != State.jump && state != State.slide) {
+        if (state != State.running) {
+            Log.d(TAG, "Not in a state that can jump: " + state);
+            return;
+        }
+        state = State.jump;
+        charBitmap.setIndices(7, 8);
+        vertSpeed = -JUMP_POWER;
     }
 }

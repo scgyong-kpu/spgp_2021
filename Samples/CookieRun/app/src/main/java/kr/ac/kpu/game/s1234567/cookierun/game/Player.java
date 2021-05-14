@@ -4,11 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import kr.ac.kpu.game.s1234567.cookierun.R;
-import kr.ac.kpu.game.s1234567.cookierun.framework.BoxCollidable;
-import kr.ac.kpu.game.s1234567.cookierun.framework.GameBitmap;
-import kr.ac.kpu.game.s1234567.cookierun.framework.GameObject;
-import kr.ac.kpu.game.s1234567.cookierun.framework.IndexedAnimationGameBitmap;
-import kr.ac.kpu.game.s1234567.cookierun.framework.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
+import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
+import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.IndexedAnimationGameBitmap;
+import kr.ac.kpu.game.s1234567.cookierun.framework.game.MainGame;
 
 public class Player implements GameObject, BoxCollidable {
     private static final String TAG = Player.class.getSimpleName();

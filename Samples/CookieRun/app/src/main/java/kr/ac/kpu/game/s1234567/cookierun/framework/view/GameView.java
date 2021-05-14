@@ -3,7 +3,6 @@ package kr.ac.kpu.game.s1234567.cookierun.framework.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;
@@ -11,8 +10,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import kr.ac.kpu.game.s1234567.cookierun.framework.MainGame;
-import kr.ac.kpu.game.s1234567.cookierun.framework.Sound;
+import kr.ac.kpu.game.s1234567.cookierun.framework.game.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.framework.utils.Sound;
 
 public class GameView extends View {
     private static final String TAG = GameView.class.getSimpleName();

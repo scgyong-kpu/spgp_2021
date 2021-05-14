@@ -1,13 +1,15 @@
-package kr.ac.kpu.game.s1234567.cookierun.framework;
+package kr.ac.kpu.game.s1234567.cookierun.framework.game;
 
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.ac.kpu.game.s1234567.cookierun.R;
+import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
+import kr.ac.kpu.game.s1234567.cookierun.framework.iface.Recyclable;
+import kr.ac.kpu.game.s1234567.cookierun.framework.object.HorizontalScrollBackground;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 import kr.ac.kpu.game.s1234567.cookierun.game.Player;
 import kr.ac.kpu.game.s1234567.cookierun.game.Score;

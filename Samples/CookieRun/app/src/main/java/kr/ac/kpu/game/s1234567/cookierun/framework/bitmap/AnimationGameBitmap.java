@@ -1,11 +1,7 @@
-package kr.ac.kpu.game.s1234567.cookierun.framework;
+package kr.ac.kpu.game.s1234567.cookierun.framework.bitmap;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.RectF;
 
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 

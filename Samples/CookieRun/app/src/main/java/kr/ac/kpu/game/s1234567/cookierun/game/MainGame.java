@@ -14,7 +14,7 @@ public class MainGame extends BaseGame {
     private Score score;
 
     public enum Layer {
-        bg1, enemy, bullet, player, bg2, ui, controller, ENEMY_COUNT
+        bg, platform, player, ui, controller, LAYER_COUNT
     }
 
     public void add(Layer layer, GameObject obj) {
@@ -29,7 +29,7 @@ public class MainGame extends BaseGame {
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
 
-        initLayers(Layer.ENEMY_COUNT.ordinal());
+        initLayers(Layer.LAYER_COUNT.ordinal());
 
         player = new Player(w/2, h - 300);
         //layers.get(Layer.player.ordinal()).add(player);
@@ -41,12 +41,18 @@ public class MainGame extends BaseGame {
         score.setScore(0);
         add(Layer.ui, score);
 
-        add(Layer.bg1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_1, -10));
-        add(Layer.bg1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -20));
-        add(Layer.bg1, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -30));
+        add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_1, -10));
+        add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -20));
+        add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -30));
 //
+        float tx = 100, ty = h - 500;
+        while (tx < w) {
+            Platform platform = new Platform(Platform.Type.T_10x2, tx, ty);
+            add(Layer.platform, platform);
+            tx += platform.getDstWidth();
 //        VerticalScrollBackground clouds = new VerticalScrollBackground(R.mipmap.clouds, 20);
 //        add(Layer.bg2, clouds);
+        }
 
         initialized = true;
         return true;

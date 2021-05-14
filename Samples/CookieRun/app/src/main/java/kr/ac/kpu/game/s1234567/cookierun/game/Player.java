@@ -7,7 +7,7 @@ import kr.ac.kpu.game.s1234567.cookierun.R;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.IndexedAnimationGameBitmap;
-import kr.ac.kpu.game.s1234567.cookierun.framework.game.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 
 public class Player implements GameObject, BoxCollidable {
     private static final String TAG = Player.class.getSimpleName();
@@ -39,7 +39,7 @@ public class Player implements GameObject, BoxCollidable {
     }
 
     public void update() {
-        MainGame game = MainGame.get();
+        BaseGame game = BaseGame.get();
         float dx = speed * game.frameTime;
         if (tx < x) { // move left
             dx = -dx;

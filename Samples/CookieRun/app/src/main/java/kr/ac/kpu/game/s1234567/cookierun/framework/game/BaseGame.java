@@ -14,16 +14,16 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 import kr.ac.kpu.game.s1234567.cookierun.game.Player;
 import kr.ac.kpu.game.s1234567.cookierun.game.Score;
 
-public class MainGame {
-    private static final String TAG = MainGame.class.getSimpleName();
+public class BaseGame {
+    private static final String TAG = BaseGame.class.getSimpleName();
     // singleton
-    private static MainGame instance;
+    private static BaseGame instance;
     private Player player;
     private Score score;
 
-    public static MainGame get() {
+    public static BaseGame get() {
         if (instance == null) {
-            instance = new MainGame();
+            instance = new BaseGame();
         }
         return instance;
     }

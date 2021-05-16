@@ -47,7 +47,7 @@ public class HorizontalScrollBackground implements GameObject {
         int curr = (int)scroll % dw;
         if (curr > 0) curr -= dw;
 
-        while (curr < vh) {
+        while (curr < vw) {
             dstRect.set(curr, 0, curr + dw, vh);
             canvas.drawBitmap(bitmap, srcRect, dstRect, null);
             curr += dw;

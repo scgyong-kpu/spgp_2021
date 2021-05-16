@@ -31,7 +31,8 @@ public class MainGame extends BaseGame {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
-        player = new Player(200, h - 300);
+        float y = h - Platform.Type.T_2x2.height() - 255;
+        player = new Player(200, y);
         //layers.get(Layer.player.ordinal()).add(player);
         add(Layer.player, player);
 //        add(Layer.controller, new EnemyGenerator());

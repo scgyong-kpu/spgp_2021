@@ -19,11 +19,8 @@ public class Player implements GameObject, BoxCollidable {
     private static final float JUMP_POWER = 1200;
     private final IndexedAnimationGameBitmap charBitmap;
     private final float ground_y;
-    private float fireTime;
     private float x, y;
-    private float tx, ty;
     private float vertSpeed;
-    private float speed;
 
     private enum State {
         running, jump, doubleJump, slide, hit
@@ -34,19 +31,8 @@ public class Player implements GameObject, BoxCollidable {
         this.x = x;
         this.y = y;
         this.ground_y = y;
-        this.tx = x;
-        this.ty = 0;
-        this.speed = 800;
-        this.charBitmap = new IndexedAnimationGameBitmap(R.mipmap.cookie, 4.5f, 0);
+        this.charBitmap = new IndexedAnimationGameBitmap(R.mipmap.cookie, 7.5f, 0);
         this.charBitmap.setIndices(100, 101, 102, 103);
-//        this.planeBitmap = new GameBitmap(R.mipmap.fighter);
-//        this.fireBitmap = new GameBitmap(R.mipmap.laser_0);
-        this.fireTime = 0.0f;
-    }
-
-    public void moveTo(float x, float y) {
-        this.tx = x;
-        //this.ty = this.y;
     }
 
     public void update() {

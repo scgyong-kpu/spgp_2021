@@ -2,6 +2,8 @@ package kr.ac.kpu.game.s1234567.cookierun.game;
 
 import android.view.MotionEvent;
 
+import java.util.ArrayList;
+
 import kr.ac.kpu.game.s1234567.cookierun.R;
 import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
@@ -19,6 +21,10 @@ public class MainGame extends BaseGame {
 
     public void add(Layer layer, GameObject obj) {
         add(layer.ordinal(), obj);
+    }
+
+    public ArrayList<GameObject> objectsAt(Layer layer) {
+        return objectsAt(layer.ordinal());
     }
 
     @Override

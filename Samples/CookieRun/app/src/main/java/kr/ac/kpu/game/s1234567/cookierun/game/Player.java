@@ -37,7 +37,7 @@ public class Player implements GameObject, BoxCollidable {
 
     public void update() {
         BaseGame game = BaseGame.get();
-        if (state == State.jump) {
+        if (state == State.jump || state == State.doubleJump) {
             float y = this.y + vertSpeed * game.frameTime;
 //            charBitmap.move(0, y - this.y);
             vertSpeed += GRAVITY * game.frameTime;
@@ -61,12 +61,17 @@ public class Player implements GameObject, BoxCollidable {
 
     public void jump() {
         //if (state != State.running && state != State.jump && state != State.slide) {
-        if (state != State.running) {
-            Log.d(TAG, "Not in a state that can jump: " + state);
+        if (state == State.running) {
+            state = State.jump;
+            charBitmap.setIndices(7, 8);
+            vertSpeed = -JUMP_POWER;
+        } else if (state == State.jump) {
+            state = State.doubleJump;
+            charBitmap.setIndices(1, 2, 3, 4);
+            vertSpeed = -JUMP_POWER;
+        } else {
+                Log.d(TAG, "Not in a state that can jump: " + state);
             return;
         }
-        state = State.jump;
-        charBitmap.setIndices(7, 8);
-        vertSpeed = -JUMP_POWER;
     }
 }

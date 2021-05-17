@@ -14,10 +14,6 @@ public class Platform extends ImageObject {
     public static int UNIT_SIZE = 40;
     public static int SPEED = 150;
 
-    public float getRight() {
-        return dstRect.right;
-    }
-
     public enum Type {
         T_10x2, T_2x2, T_3x1, RANDOM;
 

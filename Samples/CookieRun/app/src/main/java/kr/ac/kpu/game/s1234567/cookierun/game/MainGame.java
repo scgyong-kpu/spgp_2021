@@ -16,7 +16,7 @@ public class MainGame extends BaseGame {
     private Score score;
 
     public enum Layer {
-        bg, platform, player, ui, controller, LAYER_COUNT
+        bg, platform, item, player, ui, controller, LAYER_COUNT
     }
 
     public void add(Layer layer, GameObject obj) {

@@ -29,6 +29,11 @@ public class ImageObject implements GameObject {
         float b = y + h / 2 * GameView.MULTIPLIER;
         dstRect.set(l, t, r, b);
     }
+
+    public float getRight() {
+        return dstRect.right;
+    }
+
     @Override
     public void update() {
 

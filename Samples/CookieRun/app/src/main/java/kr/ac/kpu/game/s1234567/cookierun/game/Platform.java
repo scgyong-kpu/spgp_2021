@@ -1,11 +1,13 @@
 package kr.ac.kpu.game.s1234567.cookierun.game;
 
 import kr.ac.kpu.game.s1234567.cookierun.R;
+import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
 public class Platform extends ImageObject {
     public static int UNIT_SIZE = 40;
+    public static int SPEED = 150;
     public enum Type {
         T_10x2, T_2x2, T_3x1;
         float width() {
@@ -32,5 +34,12 @@ public class Platform extends ImageObject {
         float w = type.width();
         float h = type.height();
         dstRect.set(x, y, x + w, y + h);
+    }
+
+    @Override
+    public void update() {
+        BaseGame game = BaseGame.get();
+        float dx = SPEED * game.frameTime;
+        dstRect.offset(-dx, 0);
     }
 }

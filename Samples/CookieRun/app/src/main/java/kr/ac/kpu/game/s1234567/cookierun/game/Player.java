@@ -21,6 +21,9 @@ public class Player implements GameObject, BoxCollidable {
     private final float ground_y;
     private float x, y;
     private float vertSpeed;
+    private int[] ANIM_INDICES_RUNNING = { 100, 101, 102, 103 };
+    private int[] ANIM_INDICES_JUMP = { 7, 8 };
+    private int[] ANIM_INDICES_DOUBLE_JUMP = { 1, 2, 3, 4 };
 
     private enum State {
         running, jump, doubleJump, slide, hit
@@ -32,7 +35,7 @@ public class Player implements GameObject, BoxCollidable {
         this.y = y;
         this.ground_y = y;
         this.charBitmap = new IndexedAnimationGameBitmap(R.mipmap.cookie, 7.5f, 0);
-        this.charBitmap.setIndices(100, 101, 102, 103);
+        this.charBitmap.setIndices(ANIM_INDICES_RUNNING);
     }
 
     public void update() {
@@ -44,7 +47,7 @@ public class Player implements GameObject, BoxCollidable {
             if (y >= ground_y) {
                 y = ground_y;
                 state = State.running;
-                this.charBitmap.setIndices(100, 101, 102, 103);
+                this.charBitmap.setIndices(ANIM_INDICES_RUNNING);
             }
             this.y = y;
         }
@@ -63,11 +66,11 @@ public class Player implements GameObject, BoxCollidable {
         //if (state != State.running && state != State.jump && state != State.slide) {
         if (state == State.running) {
             state = State.jump;
-            charBitmap.setIndices(7, 8);
+            charBitmap.setIndices(ANIM_INDICES_JUMP);
             vertSpeed = -JUMP_POWER;
         } else if (state == State.jump) {
             state = State.doubleJump;
-            charBitmap.setIndices(1, 2, 3, 4);
+            charBitmap.setIndices(ANIM_INDICES_DOUBLE_JUMP);
             vertSpeed = -JUMP_POWER;
         } else {
                 Log.d(TAG, "Not in a state that can jump: " + state);

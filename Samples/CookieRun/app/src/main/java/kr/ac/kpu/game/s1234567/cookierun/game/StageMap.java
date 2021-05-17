@@ -29,7 +29,7 @@ public class StageMap implements GameObject {
         if (rightMost < vw) {
             Log.d(TAG, "create a Platform here !! @" + rightMost + " Platforms=" + objects.size());
             float tx = rightMost, ty = vh - Platform.Type.T_2x2.height();
-            Platform platform = new Platform(Platform.Type.T_10x2, tx, ty);
+            Platform platform = new Platform(Platform.Type.RANDOM, tx, ty);
             game.add(MainGame.Layer.platform, platform);
         }
     }

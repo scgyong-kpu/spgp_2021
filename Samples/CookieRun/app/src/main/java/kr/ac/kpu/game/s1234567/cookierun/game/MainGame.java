@@ -56,7 +56,7 @@ public class MainGame extends BaseGame {
 
         float tx = 0, ty = h - Platform.Type.T_2x2.height();
         while (tx < w) {
-            Platform platform = new Platform(Platform.Type.T_10x2, tx, ty);
+            Platform platform = new Platform(Platform.Type.RANDOM, tx, ty);
             add(Layer.platform, platform);
             tx += platform.getDstWidth();
 //        VerticalScrollBackground clouds = new VerticalScrollBackground(R.mipmap.clouds, 20);

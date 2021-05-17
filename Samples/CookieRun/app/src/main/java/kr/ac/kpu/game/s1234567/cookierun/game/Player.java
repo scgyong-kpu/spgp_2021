@@ -28,6 +28,18 @@ public class Player implements GameObject, BoxCollidable {
     private enum State {
         running, jump, doubleJump, slide, hit
     }
+
+    public void setState(State state) {
+        this.state = state;
+        int[] indices = ANIM_INDICES_RUNNING;
+        switch (state) {
+            case running:       indices = ANIM_INDICES_RUNNING; break;
+            case jump:          indices = ANIM_INDICES_JUMP; break;
+            case doubleJump:    indices = ANIM_INDICES_DOUBLE_JUMP; break;
+        }
+        charBitmap.setIndices(indices);
+    }
+
     private State state = State.running;
 
     public Player(float x, float y) {
@@ -35,7 +47,7 @@ public class Player implements GameObject, BoxCollidable {
         this.y = y;
         this.ground_y = y;
         this.charBitmap = new IndexedAnimationGameBitmap(R.mipmap.cookie, 7.5f, 0);
-        this.charBitmap.setIndices(ANIM_INDICES_RUNNING);
+        setState(State.running);
     }
 
     public void update() {
@@ -46,8 +58,9 @@ public class Player implements GameObject, BoxCollidable {
             vertSpeed += GRAVITY * game.frameTime;
             if (y >= ground_y) {
                 y = ground_y;
-                state = State.running;
-                this.charBitmap.setIndices(ANIM_INDICES_RUNNING);
+                setState(State.running);
+//                state = State.running;
+//                this.charBitmap.setIndices(ANIM_INDICES_RUNNING);
             }
             this.y = y;
         }
@@ -65,12 +78,14 @@ public class Player implements GameObject, BoxCollidable {
     public void jump() {
         //if (state != State.running && state != State.jump && state != State.slide) {
         if (state == State.running) {
-            state = State.jump;
-            charBitmap.setIndices(ANIM_INDICES_JUMP);
+            setState(State.jump);
+//            state = State.jump;
+//            charBitmap.setIndices(ANIM_INDICES_JUMP);
             vertSpeed = -JUMP_POWER;
         } else if (state == State.jump) {
-            state = State.doubleJump;
-            charBitmap.setIndices(ANIM_INDICES_DOUBLE_JUMP);
+            setState(State.doubleJump);
+//            state = State.doubleJump;
+//            charBitmap.setIndices(ANIM_INDICES_DOUBLE_JUMP);
             vertSpeed = -JUMP_POWER;
         } else {
                 Log.d(TAG, "Not in a state that can jump: " + state);

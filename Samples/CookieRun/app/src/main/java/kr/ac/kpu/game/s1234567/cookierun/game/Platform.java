@@ -11,7 +11,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
-public class Platform extends ImageObject implements BoxCollidable {
+public class Platform extends ImageObject {
     private static final String TAG = Platform.class.getSimpleName();
     public static int UNIT_SIZE = 70;
     public static int SPEED = 150;
@@ -72,8 +72,4 @@ public class Platform extends ImageObject implements BoxCollidable {
         }
     }
 
-    @Override
-    public void getBoundingRect(RectF rect) {
-        rect.set(dstRect);
-    }
 }

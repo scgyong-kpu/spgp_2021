@@ -6,10 +6,11 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 
 import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.GameBitmap;
+import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
-public class ImageObject implements GameObject {
+public class ImageObject implements GameObject, BoxCollidable {
     protected Bitmap bitmap;
 
     protected Rect srcRect = new Rect();
@@ -49,5 +50,10 @@ public class ImageObject implements GameObject {
     }
     public float getDstHeight() {
         return dstRect.height();
+    }
+
+    @Override
+    public void getBoundingRect(RectF rect) {
+        rect.set(dstRect);
     }
 }

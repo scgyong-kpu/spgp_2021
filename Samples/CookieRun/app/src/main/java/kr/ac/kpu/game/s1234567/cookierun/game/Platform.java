@@ -1,15 +1,17 @@
 package kr.ac.kpu.game.s1234567.cookierun.game;
 
+import android.graphics.RectF;
 import android.util.Log;
 
 import java.util.Random;
 
 import kr.ac.kpu.game.s1234567.cookierun.R;
 import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
+import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
-public class Platform extends ImageObject {
+public class Platform extends ImageObject implements BoxCollidable {
     private static final String TAG = Platform.class.getSimpleName();
     public static int UNIT_SIZE = 70;
     public static int SPEED = 150;
@@ -68,5 +70,10 @@ public class Platform extends ImageObject {
         if (getRight() < 0) {
             game.remove(this);
         }
+    }
+
+    @Override
+    public void getBoundingRect(RectF rect) {
+        rect.set(dstRect);
     }
 }

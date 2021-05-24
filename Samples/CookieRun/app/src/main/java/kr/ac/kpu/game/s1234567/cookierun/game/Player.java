@@ -1,6 +1,7 @@
 package kr.ac.kpu.game.s1234567.cookierun.game;
 
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
@@ -9,6 +10,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.IndexedAnimationGameBitmap;
 import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
+import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
 public class Player implements GameObject, BoxCollidable {
     private static final String TAG = Player.class.getSimpleName();
@@ -24,6 +26,7 @@ public class Player implements GameObject, BoxCollidable {
     private int[] ANIM_INDICES_RUNNING = { 100, 101, 102, 103 };
     private int[] ANIM_INDICES_JUMP = { 7, 8 };
     private int[] ANIM_INDICES_DOUBLE_JUMP = { 1, 2, 3, 4 };
+    private Rect COL_BOX_OFFSETS_RUNNING = new Rect(-60, 0, 60, 135);
 
     private enum State {
         running, jump, doubleJump, slide, hit
@@ -72,6 +75,13 @@ public class Player implements GameObject, BoxCollidable {
 
     @Override
     public void getBoundingRect(RectF rect) {
+        float mult = GameView.MULTIPLIER;
+        rect.set(
+                x + COL_BOX_OFFSETS_RUNNING.left * mult,
+                y + COL_BOX_OFFSETS_RUNNING.top * mult,
+                x + COL_BOX_OFFSETS_RUNNING.right * mult,
+                y + COL_BOX_OFFSETS_RUNNING.bottom * mult
+        );
         //planeBitmap.getBoundingRect(x, y, rect);
     }
 

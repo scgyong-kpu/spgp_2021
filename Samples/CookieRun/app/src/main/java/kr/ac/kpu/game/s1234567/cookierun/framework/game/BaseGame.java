@@ -1,11 +1,17 @@
 package kr.ac.kpu.game.s1234567.cookierun.framework.game;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import kr.ac.kpu.game.s1234567.cookierun.BuildConfig;
+import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.Recyclable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
@@ -14,6 +20,8 @@ public class BaseGame {
     private static final String TAG = BaseGame.class.getSimpleName();
     // singleton
     private static BaseGame instance;
+    private RectF collisionRect;
+    private Paint collisionPaint;
 
     public static BaseGame get() {
 //        if (instance == null) {
@@ -25,6 +33,13 @@ public class BaseGame {
 
     protected BaseGame() {
         instance = this;
+
+        if (BuildConfig.showsCollisionBox) {
+            collisionRect = new RectF();
+            collisionPaint = new Paint();
+            collisionPaint.setStyle(Paint.Style.STROKE);
+            collisionPaint.setColor(Color.RED);
+        }
     }
 //    Player player;
     ArrayList<ArrayList<GameObject>> layers;
@@ -71,6 +86,17 @@ public class BaseGame {
         for (ArrayList<GameObject> objects: layers) {
             for (GameObject o : objects) {
                 o.draw(canvas);
+            }
+        }
+        if (BuildConfig.showsCollisionBox) {
+            for (ArrayList<GameObject> objects: layers) {
+                for (GameObject o : objects) {
+                    if (!(o instanceof BoxCollidable)) {
+                        continue;
+                    }
+                    ((BoxCollidable) o).getBoundingRect(collisionRect);
+                    canvas.drawRect(collisionRect, collisionPaint);
+                }
             }
         }
     }

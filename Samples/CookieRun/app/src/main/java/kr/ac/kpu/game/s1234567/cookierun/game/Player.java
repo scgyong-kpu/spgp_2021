@@ -27,6 +27,9 @@ public class Player implements GameObject, BoxCollidable {
     private int[] ANIM_INDICES_JUMP = { 7, 8 };
     private int[] ANIM_INDICES_DOUBLE_JUMP = { 1, 2, 3, 4 };
     private Rect COL_BOX_OFFSETS_RUNNING = new Rect(-60, 0, 60, 135);
+    private Rect COL_BOX_OFFSETS_JUMP = new Rect(-60,20,60,135);
+    private Rect COL_BOX_OFFSETS_DOUBLE_JUMP = new Rect(-60,20,60,135);
+    private Rect collisionOffsetRect = COL_BOX_OFFSETS_RUNNING;
 
     private enum State {
         running, jump, doubleJump, slide, hit
@@ -36,9 +39,18 @@ public class Player implements GameObject, BoxCollidable {
         this.state = state;
         int[] indices = ANIM_INDICES_RUNNING;
         switch (state) {
-            case running:       indices = ANIM_INDICES_RUNNING; break;
-            case jump:          indices = ANIM_INDICES_JUMP; break;
-            case doubleJump:    indices = ANIM_INDICES_DOUBLE_JUMP; break;
+            case running:
+                indices = ANIM_INDICES_RUNNING;
+                collisionOffsetRect = COL_BOX_OFFSETS_RUNNING;
+                break;
+            case jump:
+                indices = ANIM_INDICES_JUMP;
+                collisionOffsetRect = COL_BOX_OFFSETS_JUMP;
+                break;
+            case doubleJump:
+                indices = ANIM_INDICES_DOUBLE_JUMP;
+                collisionOffsetRect = COL_BOX_OFFSETS_DOUBLE_JUMP;
+                break;
         }
         charBitmap.setIndices(indices);
     }
@@ -77,10 +89,10 @@ public class Player implements GameObject, BoxCollidable {
     public void getBoundingRect(RectF rect) {
         float mult = GameView.MULTIPLIER;
         rect.set(
-                x + COL_BOX_OFFSETS_RUNNING.left * mult,
-                y + COL_BOX_OFFSETS_RUNNING.top * mult,
-                x + COL_BOX_OFFSETS_RUNNING.right * mult,
-                y + COL_BOX_OFFSETS_RUNNING.bottom * mult
+                x + collisionOffsetRect.left * mult,
+                y + collisionOffsetRect.top * mult,
+                x + collisionOffsetRect.right * mult,
+                y + collisionOffsetRect.bottom * mult
         );
         //planeBitmap.getBoundingRect(x, y, rect);
     }

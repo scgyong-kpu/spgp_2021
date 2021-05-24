@@ -23,12 +23,12 @@ public class Jelly extends ImageObject {
     public Jelly(int index, float x, float y) {
         ibmp = new IndexedGameBitmap(R.mipmap.jelly, JELLY_WIDTH, JELLY_HEIGHT, JELLIES_IN_A_ROW, BORDER_WIDTH, SPACING_WIDTH);
         ibmp.setIndex(index);
-        float l = x - JELLY_WIDTH / 2 * GameView.MULTIPLIER;
-        float t = y - JELLY_HEIGHT / 2 * GameView.MULTIPLIER;
-        float r = x + JELLY_WIDTH / 2 * GameView.MULTIPLIER;
-        float b = y + JELLY_HEIGHT / 2 * GameView.MULTIPLIER;
+        float l = x;
+        float t = y;
+        float r = x + Platform.UNIT_SIZE * GameView.MULTIPLIER;
+        float b = y + Platform.UNIT_SIZE * GameView.MULTIPLIER;
         dstRect.set(l, t, r, b);
-        Log.d(TAG, "index = " + index + " Rect = " + dstRect);
+        //Log.d(TAG, "index = " + index + " Rect = " + dstRect);
     }
     @Override
     public void update() {

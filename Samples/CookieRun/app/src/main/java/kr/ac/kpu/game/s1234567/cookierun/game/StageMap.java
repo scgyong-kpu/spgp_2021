@@ -51,7 +51,7 @@ public class StageMap implements GameObject {
         xPos -= Platform.SPEED * GameView.MULTIPLIER * game.frameTime;
         float vw = GameView.view.getWidth();
         while (xPos < vw) {
-            Log.d(TAG, "xPos=" + xPos + " column=" + current);
+            //Log.d(TAG, "xPos=" + xPos + " column=" + current);
             createColumn();
             xPos += Platform.UNIT_SIZE * GameView.MULTIPLIER;
         }

@@ -88,6 +88,11 @@ public class StageMap implements GameObject {
             return 0;
         }
     }
+
+    public boolean isDone() {
+        int lineIndex = current / columns * rows;
+        return lines.size() <= lineIndex;
+    }
 //        ArrayList<GameObject> objects = game.objectsAt(MainGame.Layer.platform);
 //        float rightMost = 0;
 //        for (GameObject obj: objects) {

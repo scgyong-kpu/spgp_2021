@@ -57,6 +57,7 @@ public class Platform extends ImageObject {
         float w = type.width();
         float h = type.height();
         dstRect.set(x, y, x + w, y + h);
+        Log.d(TAG, "Platform(" + type + ") " + dstRect);
     }
 
     @Override

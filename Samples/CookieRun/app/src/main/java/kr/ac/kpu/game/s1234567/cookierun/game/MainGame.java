@@ -37,6 +37,8 @@ public class MainGame extends BaseGame {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
+        add(Layer.controller, new StageMap("stage_01.txt"));
+
         float y = h - Platform.Type.T_2x2.height() - 255;
         player = new Player(200, y);
         //layers.get(Layer.player.ordinal()).add(player);
@@ -52,16 +54,14 @@ public class MainGame extends BaseGame {
         add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_2, -20));
         add(Layer.bg, new HorizontalScrollBackground(R.mipmap.cookie_run_bg_3, -30));
 //
-        add(Layer.controller, new StageMap("stage_01.txt"));
-
-        float tx = 0, ty = h - Platform.Type.T_2x2.height();
-        while (tx < w) {
-            Platform platform = new Platform(Platform.Type.RANDOM, tx, ty);
-            add(Layer.platform, platform);
-            tx += platform.getDstWidth();
-//        VerticalScrollBackground clouds = new VerticalScrollBackground(R.mipmap.clouds, 20);
-//        add(Layer.bg2, clouds);
-        }
+//        float tx = 0, ty = h - Platform.Type.T_2x2.height();
+//        while (tx < w) {
+//            Platform platform = new Platform(Platform.Type.RANDOM, tx, ty);
+//            add(Layer.platform, platform);
+//            tx += platform.getDstWidth();
+////        VerticalScrollBackground clouds = new VerticalScrollBackground(R.mipmap.clouds, 20);
+////        add(Layer.bg2, clouds);
+//        }
 
         initialized = true;
         return true;

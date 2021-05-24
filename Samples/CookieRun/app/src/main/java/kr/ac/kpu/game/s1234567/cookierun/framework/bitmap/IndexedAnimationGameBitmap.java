@@ -30,7 +30,7 @@ public class IndexedAnimationGameBitmap extends AnimationGameBitmap {
             int r = l + 270;
             int b = t + 270;
             Rect rect = new Rect(l, t, r, b);
-            Log.d(TAG, "Adding rect: " + rect);
+            //Log.d(TAG, "Adding rect: " + rect);
             srcRects.add(rect);
         }
         frameCount = indices.length;

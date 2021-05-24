@@ -31,7 +31,8 @@ public class StageMap implements GameObject {
             String[] comps = header.split(" ");
             columns = Integer.parseInt(comps[0]);
             rows = Integer.parseInt(comps[1]);
-            Log.d(TAG, "Col=" + columns + " Row="  + rows);
+            Platform.UNIT_SIZE = (int) Math.ceil(GameView.view.getHeight() / rows / GameView.MULTIPLIER);
+            Log.d(TAG, "Col=" + columns + " Row="  + rows + " UnitSize=" + Platform.UNIT_SIZE);
             while (true) {
                 String line = reader.readLine();
                 if (line == null) {

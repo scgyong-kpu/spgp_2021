@@ -56,4 +56,8 @@ public class ImageObject implements GameObject, BoxCollidable {
     public void getBoundingRect(RectF rect) {
         rect.set(dstRect);
     }
+
+    public RectF getBoundingRect() {
+        return dstRect;
+    }
 }

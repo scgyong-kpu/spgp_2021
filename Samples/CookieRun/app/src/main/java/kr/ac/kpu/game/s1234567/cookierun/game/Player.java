@@ -5,6 +5,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import kr.ac.kpu.game.s1234567.cookierun.R;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
@@ -69,16 +71,37 @@ public class Player implements GameObject, BoxCollidable {
         BaseGame game = BaseGame.get();
         if (state == State.jump || state == State.doubleJump) {
             float y = this.y + vertSpeed * game.frameTime;
-//            charBitmap.move(0, y - this.y);
-            vertSpeed += GRAVITY * game.frameTime;
-            if (y >= ground_y) {
-                y = ground_y;
-                setState(State.running);
-//                state = State.running;
-//                this.charBitmap.setIndices(ANIM_INDICES_RUNNING);
+            if (vertSpeed >= 0) {
+                float foot = y + collisionOffsetRect.bottom * GameView.MULTIPLIER;
+                float platformTop = findNearestPlatformTop();
+                if (foot >= platformTop) {
+                    y -= foot - platformTop;
+                    setState(State.running);
+                }
             }
             this.y = y;
+            vertSpeed += GRAVITY * game.frameTime;
         }
+    }
+
+    private float findNearestPlatformTop() {
+        MainGame game = (MainGame)BaseGame.get();
+        ArrayList<GameObject> platforms = game.objectsAt(MainGame.Layer.platform);
+        float top = GameView.view.getHeight();
+        for (GameObject obj: platforms) {
+            Platform platform = (Platform) obj;
+            RectF rect = platform.getBoundingRect();
+            if (rect.left > x || x > rect.right) {
+                continue;
+            }
+            if (rect.top < y) {
+                continue;
+            }
+            if (top > rect.top) {
+                top = rect.top;
+            }
+        }
+        return top;
     }
 
     public void draw(Canvas canvas) {

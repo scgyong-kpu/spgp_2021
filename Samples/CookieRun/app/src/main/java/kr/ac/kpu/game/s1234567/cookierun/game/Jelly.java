@@ -33,7 +33,7 @@ public class Jelly extends ImageObject {
     @Override
     public void update() {
         BaseGame game = BaseGame.get();
-        float dx = Platform.SPEED * game.frameTime;
+        float dx = Platform.SPEED * GameView.MULTIPLIER * game.frameTime;
         dstRect.offset(-dx, 0);
         if (getRight() < 0) {
             game.remove(this);

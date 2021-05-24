@@ -65,7 +65,7 @@ public class Platform extends ImageObject {
     @Override
     public void update() {
         BaseGame game = BaseGame.get();
-        float dx = SPEED * game.frameTime;
+        float dx = SPEED * GameView.MULTIPLIER * game.frameTime;
         dstRect.offset(-dx, 0);
         if (getRight() < 0) {
             game.remove(this);

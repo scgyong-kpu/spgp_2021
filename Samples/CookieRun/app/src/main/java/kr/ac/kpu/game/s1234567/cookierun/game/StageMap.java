@@ -47,14 +47,18 @@ public class StageMap implements GameObject {
     }
     @Override
     public void update() {
-        createColumn();
+        MainGame game = (MainGame) BaseGame.get();
+        xPos -= Platform.SPEED * GameView.MULTIPLIER * game.frameTime;
+        float vw = GameView.view.getWidth();
+        while (xPos < vw) {
+            Log.d(TAG, "xPos=" + xPos + " column=" + current);
+            createColumn();
+            xPos += Platform.UNIT_SIZE * GameView.MULTIPLIER;
+        }
     }
 
     private float xPos;
     private void createColumn() {
-        if (current > 100) {
-            return;
-        }
         float y = 0;
         for (int row = 0; row < rows; row++) {
             char ch = getAt(current, row);
@@ -62,7 +66,6 @@ public class StageMap implements GameObject {
             y += Platform.UNIT_SIZE * GameView.MULTIPLIER;
         }
         current++;
-        xPos += Platform.UNIT_SIZE * GameView.MULTIPLIER;
     }
 
     private void createObject(char ch, float x, float y) {

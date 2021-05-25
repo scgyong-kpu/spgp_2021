@@ -25,10 +25,12 @@ public class Player implements GameObject, BoxCollidable {
     private int[] ANIM_INDICES_JUMP = { 7, 8 };
     private int[] ANIM_INDICES_DOUBLE_JUMP = { 1, 2, 3, 4 };
     private int[] ANIM_INDICES_FALLING = { 0 };
+    private int[] ANIM_INDICES_SLIDE = { 9, 10 };
     private Rect COL_BOX_OFFSETS_RUNNING = new Rect(-60, 0, 60, 135);
     private Rect COL_BOX_OFFSETS_JUMP = new Rect(-60,20,60,135);
     private Rect COL_BOX_OFFSETS_DOUBLE_JUMP = new Rect(-60,-10,60,135);
     private Rect COL_BOX_OFFSETS_FALLING = new Rect(-60,20,60,135);
+    private Rect COL_BOX_OFFSETS_SLIDE = new Rect(-80,68,80,135);
     private Rect collisionOffsetRect = COL_BOX_OFFSETS_RUNNING;
 
     private enum State {
@@ -55,6 +57,10 @@ public class Player implements GameObject, BoxCollidable {
             case falling:
                 indices = ANIM_INDICES_FALLING;
                 collisionOffsetRect = COL_BOX_OFFSETS_FALLING;
+                break;
+            case slide:
+                indices = ANIM_INDICES_SLIDE;
+                collisionOffsetRect = COL_BOX_OFFSETS_SLIDE;
                 break;
         }
         charBitmap.setIndices(indices);
@@ -84,7 +90,7 @@ public class Player implements GameObject, BoxCollidable {
             }
             this.y = y + dy;
             vertSpeed += GRAVITY * game.frameTime;
-        } else if (state == State.running) {
+        } else if (state == State.running || state == State.slide) {
             float platformTop = findNearestPlatformTop();
             if (foot < platformTop) {
                 setState(State.falling);
@@ -134,19 +140,28 @@ public class Player implements GameObject, BoxCollidable {
 
     public void jump() {
         //if (state != State.running && state != State.jump && state != State.slide) {
-        if (state == State.running) {
+        if (state == State.running || state == State.slide) {
             setState(State.jump);
-//            state = State.jump;
-//            charBitmap.setIndices(ANIM_INDICES_JUMP);
             vertSpeed = -JUMP_POWER;
         } else if (state == State.jump) {
             setState(State.doubleJump);
-//            state = State.doubleJump;
-//            charBitmap.setIndices(ANIM_INDICES_DOUBLE_JUMP);
             vertSpeed = -JUMP_POWER;
         } else {
-                Log.d(TAG, "Not in a state that can jump: " + state);
+            Log.d(TAG, "Not in a state that can jump: " + state);
             return;
         }
+    }
+
+    public void startSliding() {
+        if (state != State.running) {
+            return;
+        }
+        setState(State.slide);
+    }
+    public void endSliding() {
+        if (state != State.slide) {
+            return;
+        }
+        setState(State.running);
     }
 }

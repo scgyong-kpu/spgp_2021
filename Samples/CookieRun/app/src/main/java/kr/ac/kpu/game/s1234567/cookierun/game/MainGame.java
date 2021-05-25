@@ -83,17 +83,16 @@ public class MainGame extends BaseGame {
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
 //        if (action == MotionEvent.ACTION_DOWN) {
-        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+        if (action == MotionEvent.ACTION_DOWN) {
 //            player.moveTo(event.getX(), event.getY());
-            player.jump();
-//            int li = 0;
-//            for (ArrayList<GameObject> objects: layers) {
-//                for (GameObject o : objects) {
-//                    Log.d(TAG, "L:" + li + " " + o);
-//                }
-//                li++;
-//            }
+            if (event.getX() < GameView.view.getWidth() / 2) {
+                player.jump();
+            } else {
+                player.startSliding();
+            }
             return true;
+        } else if (action == MotionEvent.ACTION_UP) {
+            player.endSliding();
         }
         return false;
     }

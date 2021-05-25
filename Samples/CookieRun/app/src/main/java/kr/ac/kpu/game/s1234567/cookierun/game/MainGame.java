@@ -15,6 +15,9 @@ public class MainGame extends BaseGame {
     private Player player;
     private Score score;
 
+    public static MainGame get() {
+        return (MainGame) instance;
+    }
     public enum Layer {
         bg, platform, item, player, ui, controller, LAYER_COUNT
     }
@@ -38,6 +41,7 @@ public class MainGame extends BaseGame {
         initLayers(Layer.LAYER_COUNT.ordinal());
 
         add(Layer.controller, new StageMap("stage_01.txt"));
+        add(Layer.controller, new CollisionChecker());
 
         player = new Player(Platform.Type.T_2x2.width(), h / 2);
         //layers.get(Layer.player.ordinal()).add(player);

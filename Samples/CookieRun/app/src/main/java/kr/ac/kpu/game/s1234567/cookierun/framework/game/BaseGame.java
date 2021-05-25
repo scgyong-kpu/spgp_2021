@@ -19,7 +19,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 public class BaseGame {
     private static final String TAG = BaseGame.class.getSimpleName();
     // singleton
-    private static BaseGame instance;
+    protected static BaseGame instance;
     private RectF collisionRect;
     private Paint collisionPaint;
 

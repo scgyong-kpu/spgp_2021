@@ -22,23 +22,25 @@ public class Player implements GameObject, BoxCollidable {
     private static final float GRAVITY = 2500;
     private static final float JUMP_POWER = 1200;
     private final IndexedAnimationGameBitmap charBitmap;
-    private final float ground_y;
     private float x, y;
     private float vertSpeed;
     private int[] ANIM_INDICES_RUNNING = { 100, 101, 102, 103 };
     private int[] ANIM_INDICES_JUMP = { 7, 8 };
     private int[] ANIM_INDICES_DOUBLE_JUMP = { 1, 2, 3, 4 };
+    private int[] ANIM_INDICES_FALLING = { 0 };
     private Rect COL_BOX_OFFSETS_RUNNING = new Rect(-60, 0, 60, 135);
     private Rect COL_BOX_OFFSETS_JUMP = new Rect(-60,20,60,135);
-    private Rect COL_BOX_OFFSETS_DOUBLE_JUMP = new Rect(-60,20,60,135);
+    private Rect COL_BOX_OFFSETS_DOUBLE_JUMP = new Rect(-60,-10,60,135);
+    private Rect COL_BOX_OFFSETS_FALLING = new Rect(-60,20,60,135);
     private Rect collisionOffsetRect = COL_BOX_OFFSETS_RUNNING;
 
     private enum State {
-        running, jump, doubleJump, slide, hit
+        running, jump, doubleJump, falling, slide, hit
     }
 
     public void setState(State state) {
         this.state = state;
+        Log.d(TAG, "state = " + state);
         int[] indices = ANIM_INDICES_RUNNING;
         switch (state) {
             case running:
@@ -53,38 +55,49 @@ public class Player implements GameObject, BoxCollidable {
                 indices = ANIM_INDICES_DOUBLE_JUMP;
                 collisionOffsetRect = COL_BOX_OFFSETS_DOUBLE_JUMP;
                 break;
+            case falling:
+                indices = ANIM_INDICES_FALLING;
+                collisionOffsetRect = COL_BOX_OFFSETS_FALLING;
+                break;
         }
         charBitmap.setIndices(indices);
     }
 
-    private State state = State.running;
+    private State state = State.falling;
 
     public Player(float x, float y) {
         this.x = x;
         this.y = y;
-        this.ground_y = y;
         this.charBitmap = new IndexedAnimationGameBitmap(R.mipmap.cookie, 7.5f, 0);
         setState(State.running);
     }
 
     public void update() {
         BaseGame game = BaseGame.get();
-        if (state == State.jump || state == State.doubleJump) {
-            float y = this.y + vertSpeed * game.frameTime;
+        float foot = y + collisionOffsetRect.bottom * GameView.MULTIPLIER;
+        if (state == State.jump || state == State.doubleJump || state == State.falling) {
+            float dy = vertSpeed * game.frameTime;
+            float platformTop = findNearestPlatformTop();
             if (vertSpeed >= 0) {
-                float foot = y + collisionOffsetRect.bottom * GameView.MULTIPLIER;
-                float platformTop = findNearestPlatformTop();
-                if (foot >= platformTop) {
-                    y -= foot - platformTop;
+                if (foot + dy >= platformTop) {
+                    dy = platformTop - foot;
                     setState(State.running);
                 }
             }
-            this.y = y;
+            this.y = y + dy;
             vertSpeed += GRAVITY * game.frameTime;
+        } else if (state == State.running) {
+            float platformTop = findNearestPlatformTop();
+            if (foot < platformTop) {
+                setState(State.falling);
+                vertSpeed = 0;
+                //this.y += 0.01;
+            }
         }
     }
 
     private float findNearestPlatformTop() {
+        float foot = y + collisionOffsetRect.bottom * GameView.MULTIPLIER;
         MainGame game = (MainGame)BaseGame.get();
         ArrayList<GameObject> platforms = game.objectsAt(MainGame.Layer.platform);
         float top = GameView.view.getHeight();
@@ -94,13 +107,14 @@ public class Player implements GameObject, BoxCollidable {
             if (rect.left > x || x > rect.right) {
                 continue;
             }
-            if (rect.top < y) {
+            if (rect.top < foot) {
                 continue;
             }
             if (top > rect.top) {
                 top = rect.top;
             }
         }
+        //Log.d(TAG, "foot="+foot+" top="+top);
         return top;
     }
 

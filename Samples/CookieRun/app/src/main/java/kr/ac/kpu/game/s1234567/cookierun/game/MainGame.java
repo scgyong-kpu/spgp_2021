@@ -39,8 +39,7 @@ public class MainGame extends BaseGame {
 
         add(Layer.controller, new StageMap("stage_01.txt"));
 
-        float y = h - Platform.Type.T_2x2.height() - 255;
-        player = new Player(200, y);
+        player = new Player(Platform.Type.T_2x2.width(), h / 2);
         //layers.get(Layer.player.ordinal()).add(player);
         add(Layer.player, player);
 //        add(Layer.controller, new EnemyGenerator());

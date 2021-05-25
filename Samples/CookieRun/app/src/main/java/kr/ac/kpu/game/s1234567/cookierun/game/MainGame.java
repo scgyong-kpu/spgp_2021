@@ -41,12 +41,13 @@ public class MainGame extends BaseGame {
         initLayers(Layer.LAYER_COUNT.ordinal());
 
         add(Layer.controller, new StageMap("stage_01.txt"));
-        add(Layer.controller, new CollisionChecker());
 
         player = new Player(Platform.Type.T_2x2.width(), h / 2);
         //layers.get(Layer.player.ordinal()).add(player);
         add(Layer.player, player);
 //        add(Layer.controller, new EnemyGenerator());
+
+        add(Layer.controller, new CollisionChecker(player));
 
         int margin = (int) (20 * GameView.MULTIPLIER);
         score = new Score(w - margin, margin);

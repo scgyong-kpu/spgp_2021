@@ -11,11 +11,15 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.utils.CollisionHelper;
 
 public class CollisionChecker implements GameObject {
     private static final String TAG = CollisionChecker.class.getSimpleName();
+    private final Player player;
+
+    public CollisionChecker(Player player) {
+        this.player = player;
+    }
 
     @Override
     public void update() {
         MainGame game = MainGame.get();
-        Player player = (Player) game.objectsAt(MainGame.Layer.player).get(0);
         ArrayList<GameObject> items = game.objectsAt(MainGame.Layer.item);
         for (GameObject item: items) {
             if (!(item instanceof BoxCollidable)) {

@@ -16,9 +16,6 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
 public class Player implements GameObject, BoxCollidable {
     private static final String TAG = Player.class.getSimpleName();
-    private static final int BULLET_SPEED = 1500;
-    private static final float FIRE_INTERVAL = 1.0f / 7.5f;
-    private static final float LASER_DURATION = FIRE_INTERVAL / 3;
     private static final float GRAVITY = 2500;
     private static final float JUMP_POWER = 1200;
     private final IndexedAnimationGameBitmap charBitmap;
@@ -68,7 +65,8 @@ public class Player implements GameObject, BoxCollidable {
     public Player(float x, float y) {
         this.x = x;
         this.y = y;
-        this.charBitmap = new IndexedAnimationGameBitmap(R.mipmap.cookie, 7.5f, 0);
+        this.charBitmap = new IndexedAnimationGameBitmap(
+                R.mipmap.cookie, 270, 270, 2, 2, 10.f);
         setState(State.running);
     }
 

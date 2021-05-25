@@ -25,8 +25,8 @@ public class Jelly extends ImageObject {
         ibmp.setIndex(index);
         float l = x;
         float t = y;
-        float r = x + Platform.UNIT_SIZE * GameView.MULTIPLIER;
-        float b = y + Platform.UNIT_SIZE * GameView.MULTIPLIER;
+        float r = x + StageMap.UNIT_SIZE * GameView.MULTIPLIER;
+        float b = y + StageMap.UNIT_SIZE * GameView.MULTIPLIER;
         dstRect.set(l, t, r, b);
         //Log.d(TAG, "index = " + index + " Rect = " + dstRect);
     }

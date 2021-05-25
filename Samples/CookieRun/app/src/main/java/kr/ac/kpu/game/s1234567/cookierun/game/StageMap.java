@@ -15,6 +15,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
 public class StageMap implements GameObject {
+    public static int UNIT_SIZE = 70;
     private static final String TAG = StageMap.class.getSimpleName();
     private final ArrayList<String> lines = new ArrayList<String>();
     private int columns;
@@ -31,8 +32,8 @@ public class StageMap implements GameObject {
             String[] comps = header.split(" ");
             columns = Integer.parseInt(comps[0]);
             rows = Integer.parseInt(comps[1]);
-            Platform.UNIT_SIZE = (int) Math.ceil(GameView.view.getHeight() / rows / GameView.MULTIPLIER);
-            Log.d(TAG, "Col=" + columns + " Row="  + rows + " UnitSize=" + Platform.UNIT_SIZE);
+            UNIT_SIZE = (int) Math.ceil(GameView.view.getHeight() / rows / GameView.MULTIPLIER);
+            Log.d(TAG, "Col=" + columns + " Row="  + rows + " UnitSize=" + UNIT_SIZE);
             while (true) {
                 String line = reader.readLine();
                 if (line == null) {
@@ -53,7 +54,7 @@ public class StageMap implements GameObject {
         while (xPos < vw) {
             //Log.d(TAG, "xPos=" + xPos + " column=" + current);
             createColumn();
-            xPos += Platform.UNIT_SIZE * GameView.MULTIPLIER;
+            xPos += UNIT_SIZE * GameView.MULTIPLIER;
         }
     }
 
@@ -63,7 +64,7 @@ public class StageMap implements GameObject {
         for (int row = 0; row < rows; row++) {
             char ch = getAt(current, row);
             createObject(ch, xPos, y);
-            y += Platform.UNIT_SIZE * GameView.MULTIPLIER;
+            y += UNIT_SIZE * GameView.MULTIPLIER;
         }
         current++;
     }

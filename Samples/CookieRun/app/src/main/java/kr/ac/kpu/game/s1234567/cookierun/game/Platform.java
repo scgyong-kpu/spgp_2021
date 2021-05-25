@@ -13,7 +13,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
 public class Platform extends ImageObject {
     private static final String TAG = Platform.class.getSimpleName();
-    public static int UNIT_SIZE = 70;
+    //public static int UNIT_SIZE = 70;
     public static int SPEED = 150;
 
     public enum Type {
@@ -26,7 +26,7 @@ public class Platform extends ImageObject {
                 case T_2x2: w = 2; break;
                 case T_3x1: w = 3; break;
             }
-            return w * UNIT_SIZE * GameView.MULTIPLIER;
+            return w * StageMap.UNIT_SIZE * GameView.MULTIPLIER;
         }
         float height() {
             int h = 1;
@@ -34,7 +34,7 @@ public class Platform extends ImageObject {
                 case T_10x2: case T_2x2: h = 2; break;
                 case T_3x1: h = 1; break;
             }
-            return h * UNIT_SIZE * GameView.MULTIPLIER;
+            return h * StageMap.UNIT_SIZE * GameView.MULTIPLIER;
         }
         int resId() {
             switch (this) {

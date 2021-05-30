@@ -14,6 +14,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.IndexedAnimationGameBi
 import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
 
 public class Player implements GameObject, BoxCollidable {
     private static final String TAG = Player.class.getSimpleName();
@@ -104,7 +105,7 @@ public class Player implements GameObject, BoxCollidable {
     private float findNearestPlatformTop() {
         float foot = y + collisionOffsetRect.bottom * GameView.MULTIPLIER;
         MainGame game = (MainGame)BaseGame.get();
-        ArrayList<GameObject> platforms = game.objectsAt(MainGame.Layer.platform);
+        ArrayList<GameObject> platforms = MainScene.scene.objectsAt(MainScene.Layer.platform);
         float top = GameView.view.getHeight();
         for (GameObject obj: platforms) {
             Platform platform = (Platform) obj;

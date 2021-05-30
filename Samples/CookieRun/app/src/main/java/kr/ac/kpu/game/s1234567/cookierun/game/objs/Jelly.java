@@ -8,6 +8,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 import kr.ac.kpu.game.s1234567.cookierun.game.ctrl.StageMap;
+import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
 
 public class Jelly extends ImageObject {
     private static final String TAG = Jelly.class.getSimpleName();
@@ -34,7 +35,7 @@ public class Jelly extends ImageObject {
         float dx = Platform.SPEED * GameView.MULTIPLIER * game.frameTime;
         dstRect.offset(-dx, 0);
         if (getRight() < 0) {
-            game.remove(this);
+            MainScene.scene.remove(this);
         }
     }
 

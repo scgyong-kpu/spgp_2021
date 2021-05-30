@@ -11,6 +11,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.GameBitmap;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
 
 public class Obstacle extends ImageObject {
     private static final String TAG = Obstacle.class.getSimpleName();
@@ -99,7 +100,7 @@ public class Obstacle extends ImageObject {
         float dx = Platform.SPEED * GameView.MULTIPLIER * game.frameTime;
         dstRect.offset(-dx, 0);
         if (getRight() < 0) {
-            game.remove(this);
+            MainScene.scene.remove(this);
         }
     }
 

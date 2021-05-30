@@ -8,6 +8,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.utils.CollisionHelper;
 import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
 import kr.ac.kpu.game.s1234567.cookierun.game.objs.Player;
 
 public class CollisionChecker implements GameObject {
@@ -21,14 +22,14 @@ public class CollisionChecker implements GameObject {
     @Override
     public void update() {
         MainGame game = MainGame.get();
-        ArrayList<GameObject> items = game.objectsAt(MainGame.Layer.item);
+        ArrayList<GameObject> items = MainScene.scene.objectsAt(MainScene.Layer.item);
         for (GameObject item: items) {
             if (!(item instanceof BoxCollidable)) {
                 continue;
             }
             if (CollisionHelper.collides(player, (BoxCollidable) item)) {
                 //Log.d(TAG, "Collision: " + item);
-                game.remove(item);
+                MainScene.scene.remove(item);
             }
         }
     }

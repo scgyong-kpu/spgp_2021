@@ -14,6 +14,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
 import kr.ac.kpu.game.s1234567.cookierun.game.objs.Jelly;
 import kr.ac.kpu.game.s1234567.cookierun.game.objs.Obstacle;
 import kr.ac.kpu.game.s1234567.cookierun.game.objs.Platform;
@@ -75,15 +76,16 @@ public class StageMap implements GameObject {
 
     private void createObject(char ch, float x, float y) {
         MainGame game = (MainGame) BaseGame.get();
+        MainScene scene = MainScene.scene;
         if (ch >= '1' && ch <= '9') {
             Jelly item = new Jelly(ch - '1', x, y);
-            game.add(MainGame.Layer.item, item);
+            scene.add(MainScene.Layer.item, item);
         } else if (ch >= 'O' && ch <= 'Q') {
             Platform platform = new Platform(Platform.Type.values()[ch - 'O'], x, y);
-            game.add(MainGame.Layer.platform, platform);
+            scene.add(MainScene.Layer.platform, platform);
         } else if (ch >= 'X' && ch <= 'Z') {
             Obstacle obstacle = new Obstacle(ch, x, y);
-            game.add(MainGame.Layer.obstacle, obstacle);
+            scene.add(MainScene.Layer.obstacle, obstacle);
             //Log.d(TAG, "obstacle = " + obstacle);
         }
     }

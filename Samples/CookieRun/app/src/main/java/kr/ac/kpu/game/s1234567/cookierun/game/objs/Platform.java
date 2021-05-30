@@ -9,6 +9,7 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 import kr.ac.kpu.game.s1234567.cookierun.game.ctrl.StageMap;
+import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
 
 public class Platform extends ImageObject {
     private static final String TAG = Platform.class.getSimpleName();
@@ -67,7 +68,7 @@ public class Platform extends ImageObject {
         float dx = SPEED * GameView.MULTIPLIER * game.frameTime;
         dstRect.offset(-dx, 0);
         if (getRight() < 0) {
-            game.remove(this);
+            MainScene.scene.remove(this);
         }
     }
 

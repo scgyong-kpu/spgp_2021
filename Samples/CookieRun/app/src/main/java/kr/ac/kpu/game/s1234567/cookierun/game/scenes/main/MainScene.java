@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.cookierun.game.main;
+package kr.ac.kpu.game.s1234567.cookierun.game.scenes.main;
 
 import android.view.MotionEvent;
 

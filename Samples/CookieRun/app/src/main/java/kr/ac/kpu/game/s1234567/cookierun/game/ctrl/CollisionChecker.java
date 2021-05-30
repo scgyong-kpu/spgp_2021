@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.utils.CollisionHelper;
-import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
-import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
+import kr.ac.kpu.game.s1234567.cookierun.game.scenes.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.scenes.main.MainScene;
 import kr.ac.kpu.game.s1234567.cookierun.game.objs.Player;
 
 public class CollisionChecker implements GameObject {

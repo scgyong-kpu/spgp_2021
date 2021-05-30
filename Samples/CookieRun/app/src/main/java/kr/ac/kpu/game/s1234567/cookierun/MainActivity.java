@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
-import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.scenes.main.MainGame;
 
 public class MainActivity extends AppCompatActivity {
 

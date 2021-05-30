@@ -10,8 +10,8 @@ import kr.ac.kpu.game.s1234567.cookierun.R;
 import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.GameBitmap;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
-import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
-import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
+import kr.ac.kpu.game.s1234567.cookierun.game.scenes.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.scenes.main.MainScene;
 
 public class Obstacle extends ImageObject {
     private static final String TAG = Obstacle.class.getSimpleName();

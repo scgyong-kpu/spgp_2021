@@ -13,8 +13,8 @@ import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.IndexedAnimationGameBitmap;
 import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
-import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
-import kr.ac.kpu.game.s1234567.cookierun.game.main.MainScene;
+import kr.ac.kpu.game.s1234567.cookierun.game.scenes.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.scenes.main.MainScene;
 
 public class Player implements GameObject, BoxCollidable {
     private static final String TAG = Player.class.getSimpleName();

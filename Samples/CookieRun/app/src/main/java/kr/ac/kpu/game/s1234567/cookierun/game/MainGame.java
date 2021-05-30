@@ -19,7 +19,7 @@ public class MainGame extends BaseGame {
         return (MainGame) instance;
     }
     public enum Layer {
-        bg, platform, item, player, ui, controller, LAYER_COUNT
+        bg, platform, item, obstacle, player, ui, controller, LAYER_COUNT
     }
 
     public void add(Layer layer, GameObject obj) {

@@ -77,6 +77,10 @@ public class StageMap implements GameObject {
         } else if (ch >= 'O' && ch <= 'Q') {
             Platform platform = new Platform(Platform.Type.values()[ch - 'O'], x, y);
             game.add(MainGame.Layer.platform, platform);
+        } else if (ch >= 'X' && ch <= 'Z') {
+            Obstacle obstacle = new Obstacle(ch, x, y);
+            game.add(MainGame.Layer.obstacle, obstacle);
+            //Log.d(TAG, "obstacle = " + obstacle);
         }
     }
 

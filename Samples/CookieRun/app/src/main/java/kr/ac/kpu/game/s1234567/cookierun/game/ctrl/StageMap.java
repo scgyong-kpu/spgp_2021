@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.cookierun.game;
+package kr.ac.kpu.game.s1234567.cookierun.game.ctrl;
 
 import android.content.res.AssetManager;
 import android.graphics.Canvas;
@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
+import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
+import kr.ac.kpu.game.s1234567.cookierun.game.objs.Jelly;
+import kr.ac.kpu.game.s1234567.cookierun.game.objs.Obstacle;
+import kr.ac.kpu.game.s1234567.cookierun.game.objs.Platform;
 
 public class StageMap implements GameObject {
     public static int UNIT_SIZE = 70;

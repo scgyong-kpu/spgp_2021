@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.cookierun.game;
+package kr.ac.kpu.game.s1234567.cookierun.game.objs;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

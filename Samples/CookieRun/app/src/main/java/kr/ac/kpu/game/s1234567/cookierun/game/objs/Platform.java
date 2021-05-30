@@ -1,15 +1,14 @@
-package kr.ac.kpu.game.s1234567.cookierun.game;
+package kr.ac.kpu.game.s1234567.cookierun.game.objs;
 
-import android.graphics.RectF;
 import android.util.Log;
 
 import java.util.Random;
 
 import kr.ac.kpu.game.s1234567.cookierun.R;
 import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
-import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
+import kr.ac.kpu.game.s1234567.cookierun.game.ctrl.StageMap;
 
 public class Platform extends ImageObject {
     private static final String TAG = Platform.class.getSimpleName();
@@ -19,7 +18,7 @@ public class Platform extends ImageObject {
     public enum Type {
         T_10x2, T_2x2, T_3x1, RANDOM;
 
-        float width() {
+        public float width() {
             int w = 1;
             switch (this) {
                 case T_10x2: w = 10; break;
@@ -28,7 +27,7 @@ public class Platform extends ImageObject {
             }
             return w * StageMap.UNIT_SIZE * GameView.MULTIPLIER;
         }
-        float height() {
+        public float height() {
             int h = 1;
             switch (this) {
                 case T_10x2: case T_2x2: h = 2; break;
@@ -36,7 +35,7 @@ public class Platform extends ImageObject {
             }
             return h * StageMap.UNIT_SIZE * GameView.MULTIPLIER;
         }
-        int resId() {
+        public int resId() {
             switch (this) {
                 case T_10x2:
                     return R.mipmap.cookierun_platform_480x48;

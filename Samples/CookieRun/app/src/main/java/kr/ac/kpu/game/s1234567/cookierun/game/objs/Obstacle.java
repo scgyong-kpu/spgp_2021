@@ -1,4 +1,4 @@
-package kr.ac.kpu.game.s1234567.cookierun.game;
+package kr.ac.kpu.game.s1234567.cookierun.game.objs;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -10,6 +10,7 @@ import kr.ac.kpu.game.s1234567.cookierun.R;
 import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.GameBitmap;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
+import kr.ac.kpu.game.s1234567.cookierun.game.main.MainGame;
 
 public class Obstacle extends ImageObject {
     private static final String TAG = Obstacle.class.getSimpleName();

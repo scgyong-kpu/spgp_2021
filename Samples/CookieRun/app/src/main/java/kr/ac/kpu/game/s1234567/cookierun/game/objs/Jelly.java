@@ -1,15 +1,13 @@
-package kr.ac.kpu.game.s1234567.cookierun.game;
+package kr.ac.kpu.game.s1234567.cookierun.game.objs;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
 import kr.ac.kpu.game.s1234567.cookierun.R;
-import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.GameBitmap;
 import kr.ac.kpu.game.s1234567.cookierun.framework.bitmap.IndexedGameBitmap;
 import kr.ac.kpu.game.s1234567.cookierun.framework.game.BaseGame;
-import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.object.ImageObject;
 import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
+import kr.ac.kpu.game.s1234567.cookierun.game.ctrl.StageMap;
 
 public class Jelly extends ImageObject {
     private static final String TAG = Jelly.class.getSimpleName();

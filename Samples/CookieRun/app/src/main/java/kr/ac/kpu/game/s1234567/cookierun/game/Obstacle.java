@@ -3,7 +3,6 @@ package kr.ac.kpu.game.s1234567.cookierun.game;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class Obstacle extends ImageObject {
                 loadBitmaps(R.mipmap.epn01_tm01_jp1a);
                 frameTime = 1.0f / 1.0f;
                 delay = 0.0f;
-                bbOffset = new Rect(-15, -45, 15, 50);
+                bbInset = new Rect(15, 3, 15, 4);
                 break;
             case 'Y':
                 loadBitmaps(
@@ -35,7 +34,7 @@ public class Obstacle extends ImageObject {
                 );
                 frameTime = 1.0f / 5.0f;
                 delay = 1.0f;
-                bbOffset = new Rect(-30, -50, 30, 111);
+                bbInset = new Rect(15, 70, 15, 4);
                 break;
             case 'Z':
                 loadBitmaps(
@@ -47,7 +46,7 @@ public class Obstacle extends ImageObject {
                 );
                 frameTime = 1.0f / 10.0f;
                 delay = 1.0f;
-                bbOffset = new Rect(-30, -10, 30, 75);
+                bbInset = new Rect(10, 70, 10, 4);
                 break;
         }
     }
@@ -56,7 +55,7 @@ public class Obstacle extends ImageObject {
     protected boolean loops = false;
     protected float frameTime, delay;
     protected float time;
-    protected Rect bbOffset;
+    protected Rect bbInset;
     protected ArrayList<Bitmap> bitmaps;
     protected int bitmapIndex;
     protected void loadBitmaps(int... resIds) {
@@ -103,13 +102,13 @@ public class Obstacle extends ImageObject {
         }
     }
 
-//    @Override
-//    public void getBoundingRect(RectF rect) {
-//        rect.set(
-//                dstRect.left - bbOffset.left,
-//                dstRect.top - bbOffset.top,
-//                dstRect.right - bbOffset.right,
-//                dstRect.bottom - bbOffset.bottom
-//        );
-//    }
+    @Override
+    public void getBoundingRect(RectF rect) {
+        rect.set(
+                dstRect.left + bbInset.left * GameView.MULTIPLIER,
+                dstRect.top + bbInset.top * GameView.MULTIPLIER,
+                dstRect.right - bbInset.right * GameView.MULTIPLIER,
+                dstRect.bottom - bbInset.bottom * GameView.MULTIPLIER
+        );
+    }
 }

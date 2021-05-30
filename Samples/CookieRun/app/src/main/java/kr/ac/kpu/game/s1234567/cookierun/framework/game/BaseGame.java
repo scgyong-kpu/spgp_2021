@@ -117,7 +117,14 @@ public class BaseGame {
     }
 
     public void draw(Canvas canvas) {
-        ArrayList<ArrayList<GameObject>> layers = getTopScene().getLayers();
+        draw(canvas, sceneStack.size() - 1);
+    }
+    protected void draw(Canvas canvas, int index) {
+        Scene scene = sceneStack.get(index);
+        if (scene.isTransparent() && index > 0) {
+            draw(canvas, index - 1);
+        }
+        ArrayList<ArrayList<GameObject>> layers = scene.getLayers();
         //if (!initialized) return;
         for (ArrayList<GameObject> objects: layers) {
             for (GameObject o : objects) {

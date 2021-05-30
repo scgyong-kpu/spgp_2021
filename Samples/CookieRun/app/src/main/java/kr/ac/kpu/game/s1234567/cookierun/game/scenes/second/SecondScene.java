@@ -21,6 +21,7 @@ public class SecondScene extends Scene {
     @Override
     public void start() {
         super.start();
+        transparent = true;
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
         initLayers(Layer.COUNT.ordinal());

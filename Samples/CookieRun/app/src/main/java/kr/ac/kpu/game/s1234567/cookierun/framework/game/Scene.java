@@ -12,6 +12,12 @@ public class Scene {
     protected ArrayList<ArrayList<GameObject>> layers;
     public ArrayList<ArrayList<GameObject>> getLayers() { return layers; }
 
+    public boolean isTransparent() {
+        return transparent;
+    }
+
+    protected boolean transparent;
+
     protected void initLayers(int layerCount) {
         layers = new ArrayList<>();
         for (int i = 0; i < layerCount; i++) {

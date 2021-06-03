@@ -72,4 +72,9 @@ public class PathView extends View {
     }
 
     Point x;
+
+    public void clear() {
+        points.clear();
+        invalidate();
+    }
 }

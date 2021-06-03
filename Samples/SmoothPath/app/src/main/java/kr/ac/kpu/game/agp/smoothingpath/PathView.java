@@ -48,6 +48,7 @@ public class PathView extends View {
     Listener listener;
     ArrayList<PointF> points = new ArrayList<>();
     Paint paint = new Paint();
+    Path path;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -60,6 +61,7 @@ public class PathView extends View {
             pt.x = event.getX();
             pt.y = event.getY();
             points.add(pt);
+            buildPath();
             Log.d(TAG, "Points:" + points.size());
             if (listener != null) {
                 listener.onAdd();
@@ -68,6 +70,18 @@ public class PathView extends View {
             invalidate();
         }
         return super.onTouchEvent(event);
+    }
+
+    private void buildPath() {
+        int ptCount = points.size();
+        if (ptCount < 2) { return; }
+        path = new Path();
+        PointF first = points.get(0);
+        path.moveTo(first.x, first.y);
+        for (int i = 1; i < ptCount; i++) {
+            PointF pt = points.get(i);
+            path.lineTo(pt.x, pt.y);
+        }
     }
 
     @Override
@@ -79,16 +93,8 @@ public class PathView extends View {
             canvas.drawCircle(first.x, first.y, 5.0f, paint);
             return;
         }
-        Path path = new Path();
-        path.moveTo(first.x, first.y);
-        for (int i = 1; i < ptCount; i++) {
-            PointF pt = points.get(i);
-            path.lineTo(pt.x, pt.y);
-        }
         canvas.drawPath(path, paint);
     }
-
-    Point x;
 
     public void clear() {
         points.clear();

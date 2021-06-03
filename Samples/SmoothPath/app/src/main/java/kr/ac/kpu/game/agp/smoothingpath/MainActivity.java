@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
                 showCount();
             }
         });
+        showCount();
     }
 
     private void showCount() {

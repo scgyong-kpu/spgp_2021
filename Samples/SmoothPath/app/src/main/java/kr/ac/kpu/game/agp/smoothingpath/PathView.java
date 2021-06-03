@@ -19,6 +19,9 @@ import java.util.ArrayList;
 public class PathView extends View {
     private static final String TAG = Path.class.getSimpleName();
 
+    public interface Listener {
+        public void onAdd();
+    }
     public PathView(Context context) {
         super(context);
         init();
@@ -28,6 +31,13 @@ public class PathView extends View {
         init();
     }
 
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+    public int getCount() {
+        return points.size();
+    }
+
     private void init() {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.STROKE);
@@ -35,6 +45,7 @@ public class PathView extends View {
         paint.setColor(Color.BLUE);
     }
 
+    Listener listener;
     ArrayList<PointF> points = new ArrayList<>();
     Paint paint = new Paint();
 
@@ -50,6 +61,9 @@ public class PathView extends View {
             pt.y = event.getY();
             points.add(pt);
             Log.d(TAG, "Points:" + points.size());
+            if (listener != null) {
+                listener.onAdd();
+            }
 
             invalidate();
         }

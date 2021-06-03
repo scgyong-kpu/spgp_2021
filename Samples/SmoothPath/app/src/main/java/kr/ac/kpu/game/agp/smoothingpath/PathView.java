@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class PathView extends View {
     private static final String TAG = Path.class.getSimpleName();
+    private static final int DIRECTION_FACTOR = 6;
 
     public interface Listener {
         public void onAdd();
@@ -77,12 +78,35 @@ public class PathView extends View {
     private void buildPath() {
         int ptCount = points.size();
         if (ptCount < 2) { return; }
+
+        for (int i = ptCount - 2; i < ptCount; i++) {
+            Point pt = points.get(i);
+            if (i == 0) { // only next
+                Point next = points.get(i + 1);
+                pt.dx = ((next.x - pt.x) / DIRECTION_FACTOR);
+                pt.dy = ((next.y - pt.y) / DIRECTION_FACTOR);
+            } else if (i == ptCount - 1) { // only prev
+                Point prev = points.get(i - 1);
+                pt.dx = ((pt.x - prev.x) / DIRECTION_FACTOR);
+                pt.dy = ((pt.y - prev.y) / DIRECTION_FACTOR);
+            } else { // prev and next
+                Point next = points.get(i + 1);
+                Point prev = points.get(i - 1);
+                pt.dx = ((next.x - prev.x) / DIRECTION_FACTOR);
+                pt.dy = ((next.y - prev.y) / DIRECTION_FACTOR);
+            }
+        }
+
         path = new Path();
-        Point first = points.get(0);
-        path.moveTo(first.x, first.y);
+        Point prev = points.get(0);
+        path.moveTo(prev.x, prev.y);
         for (int i = 1; i < ptCount; i++) {
             Point pt = points.get(i);
-            path.lineTo(pt.x, pt.y);
+            path.cubicTo(
+                    prev.x + prev.dx, prev.y + prev.dy,
+                    pt.x - pt.dx, pt.y - pt.dy,
+                    pt.x, pt.y);
+            prev = pt;
         }
     }
 

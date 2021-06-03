@@ -1,10 +1,15 @@
 package kr.ac.kpu.game.agp.smoothingpath;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
+import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -42,6 +47,10 @@ public class PathView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(2.0f);
         paint.setColor(Color.BLUE);
+
+        bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.plane);
+        hw = bitmap.getWidth() / 2;
+        hh = bitmap.getHeight() / 2;
     }
 
     class Point {
@@ -52,6 +61,9 @@ public class PathView extends View {
     ArrayList<Point> points = new ArrayList<>();
     Paint paint = new Paint();
     Path path;
+    Bitmap bitmap;
+    int hw, hh;
+    PointF fighterPos = new PointF();
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -65,6 +77,9 @@ public class PathView extends View {
             pt.y = event.getY();
             points.add(pt);
             buildPath();
+            if (points.size() == 1) {
+                fighterPos.set(pt.x, pt.y);
+            }
             Log.d(TAG, "Points:" + points.size());
             if (listener != null) {
                 listener.onAdd();
@@ -117,11 +132,34 @@ public class PathView extends View {
         Point first = points.get(0);
         if (ptCount == 1) {
             canvas.drawCircle(first.x, first.y, 5.0f, paint);
-            return;
+        } else {
+            canvas.drawPath(path, paint);
         }
-        canvas.drawPath(path, paint);
+        canvas.drawBitmap(bitmap, fighterPos.x - hw, fighterPos.y - hh, null);
     }
 
+    public void start() {
+        int ptCount = points.size();
+        if (ptCount < 2) { return; }
+        PathMeasure pm = new PathMeasure(path, false);
+        float length = pm.getLength();
+        ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
+        anim.setDuration(ptCount * 300);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            float[] pos = new float[2];
+            float[] tan = new float[2];
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float progress = animation.getAnimatedFraction();
+                pm.getPosTan(length * progress, pos, tan);
+                fighterPos.x = pos[0];
+                fighterPos.y = pos[1];
+                //Log.d(TAG, "pos:" + fighterPos);
+                invalidate();
+            }
+        });
+        anim.start();
+    }
     public void clear() {
         points.clear();
         invalidate();

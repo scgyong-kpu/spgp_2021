@@ -68,6 +68,7 @@ public class PathView extends View {
     int hw, hh;
     PointF fighterPos = new PointF();
     Paint alphaPaint;
+    float angle;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -139,7 +140,10 @@ public class PathView extends View {
         } else {
             canvas.drawPath(path, paint);
         }
+        canvas.save();
+        canvas.rotate(angle, fighterPos.x, fighterPos.y);
         canvas.drawBitmap(bitmap, fighterPos.x - hw, fighterPos.y - hh, alphaPaint);
+        canvas.restore();
     }
 
     public void start(int msecPerPoint) {
@@ -158,6 +162,7 @@ public class PathView extends View {
                 pm.getPosTan(length * progress, pos, tan);
                 fighterPos.x = pos[0];
                 fighterPos.y = pos[1];
+                angle = (float)(Math.atan2(tan[1], tan[0]) * 180 / Math.PI);
                 //Log.d(TAG, "pos:" + fighterPos);
                 invalidate();
             }

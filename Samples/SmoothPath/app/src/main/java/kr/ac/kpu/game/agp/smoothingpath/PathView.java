@@ -48,6 +48,9 @@ public class PathView extends View {
         paint.setStrokeWidth(2.0f);
         paint.setColor(Color.BLUE);
 
+        alphaPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        alphaPaint.setAlpha(60 * 255 / 100); // 60% opacity
+
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.plane);
         hw = bitmap.getWidth() / 2;
         hh = bitmap.getHeight() / 2;
@@ -59,11 +62,12 @@ public class PathView extends View {
     }
     Listener listener;
     ArrayList<Point> points = new ArrayList<>();
-    Paint paint = new Paint();
+    Paint paint;
     Path path;
     Bitmap bitmap;
     int hw, hh;
     PointF fighterPos = new PointF();
+    Paint alphaPaint;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -135,7 +139,7 @@ public class PathView extends View {
         } else {
             canvas.drawPath(path, paint);
         }
-        canvas.drawBitmap(bitmap, fighterPos.x - hw, fighterPos.y - hh, null);
+        canvas.drawBitmap(bitmap, fighterPos.x - hw, fighterPos.y - hh, alphaPaint);
     }
 
     public void start(int msecPerPoint) {

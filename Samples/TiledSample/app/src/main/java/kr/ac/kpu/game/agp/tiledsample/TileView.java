@@ -1,23 +1,19 @@
 package kr.ac.kpu.game.agp.tiledsample;
 
-import android.animation.ObjectAnimator;
-import android.app.Service;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
-
-import androidx.annotation.RequiresApi;
+import android.view.animation.DecelerateInterpolator;
 
 import kr.ac.kpu.game.agp.tiledsample.tile.TiledMap;
 
@@ -29,7 +25,7 @@ public class TileView extends View {
     private int sizeFactor;
     private TiledMap map;
     private Point screenSize = new Point();
-    private int yDiff;
+    private int xDiff, yDiff;
 
     private void postFrameCallback() {
         Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
@@ -104,7 +100,7 @@ public class TileView extends View {
     }
 
     PointF ptDown = new PointF();
-    ObjectAnimator objectAnimator;
+    ValueAnimator animator;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int endScroll = map.getFullHeight();
@@ -114,16 +110,29 @@ public class TileView extends View {
             // y dy
             ptDown.x = event.getX();
             ptDown.y = event.getY();
-            yDiff = (int) (map.getY() + ptDown.y);
-//            Log.d(TAG, "D yDiff=" + yDiff + " eventY=" + event.getY() + " mapY=" + map.getY());
-            objectAnimator = ObjectAnimator.ofInt(map, "y", map.getY(), endScroll);
-            objectAnimator.setDuration(3000);
-            objectAnimator.setInterpolator(new AccelerateInterpolator());
-            objectAnimator.start();
+            int sx = map.getX();
+            int sy = map.getY();
+            xDiff = (int) (sx + ptDown.x);
+            yDiff = (int) (sy + ptDown.y);
+            float dx = ptDown.x - getWidth() / 2.0f;
+            float dy = ptDown.y - getHeight() / 2.0f;
+            animator = ValueAnimator.ofFloat(0.0f, 1.0f);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float percent = animation.getAnimatedFraction();
+                    map.setX((int) (sx + dx * percent));
+                    map.setY((int) (sy + dy * percent));
+                }
+            });
+            animator.setInterpolator(new DecelerateInterpolator());
+            animator.setDuration(1000);
+            animator.start();
         } else if (action == MotionEvent.ACTION_MOVE) {
             // -ey + dy + y
-            objectAnimator.cancel();
+            animator.cancel();
 //            Log.d(TAG, "M yDiff=" + yDiff + " eventY=" + event.getY() + " mapY=" + map.getY());
+            map.setX((int) (xDiff - event.getX()));
             map.setY((int) (yDiff - event.getY()));
         }
         return true;

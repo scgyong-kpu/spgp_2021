@@ -3,6 +3,7 @@ package kr.ac.kpu.game.agp.tiledsample;
 import android.animation.ObjectAnimator;
 import android.app.Service;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PointF;
@@ -23,6 +24,9 @@ import kr.ac.kpu.game.agp.tiledsample.tile.TiledMap;
 public class TileView extends View {
 
     private static final String TAG = TileView.class.getSimpleName();
+    private int tilesetResource;
+    private int mapResource;
+    private int sizeFactor;
     private TiledMap map;
     private Point screenSize = new Point();
     private int yDiff;
@@ -44,6 +48,18 @@ public class TileView extends View {
     }
     public TileView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attributeSet,
+                R.styleable.TileView,
+                0, 0);
+
+        try {
+            mapResource = a.getResourceId(R.styleable.TileView_map, 0);
+            tilesetResource = a.getResourceId(R.styleable.TileView_tileset, 0);
+            sizeFactor = a.getInt(R.styleable.TileView_sizeFactor, 16);
+        } finally {
+            a.recycle();
+        }
         init();
     }
     protected void init() {
@@ -54,14 +70,14 @@ public class TileView extends View {
         } else {
             display.getSize(screenSize);
         }
-        int tileSize = screenSize.x / 16;
+        int tileSize = screenSize.x / sizeFactor;
         Log.d(TAG, "dstTileWith=" + tileSize);
-        if (screenSize.x % 16 > 0) {
+        if (screenSize.x % sizeFactor > 0) {
             tileSize++;
             Log.d(TAG, "dstTileWith=" + tileSize);
         }
-        map = TiledMap.load(getResources(), R.raw.earth, true);
-        map.loadImage(getResources(), new int[] { R.mipmap.forest_tiles }, tileSize, tileSize);
+        map = TiledMap.load(getResources(), mapResource, true);
+        map.loadImage(getResources(), new int[] { tilesetResource }, tileSize, tileSize);
         Log.d(TAG, "Done?");
 
         postFrameCallback();

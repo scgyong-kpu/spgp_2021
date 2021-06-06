@@ -7,6 +7,9 @@
     tools:context=".MainActivity">
 
     <kr.ac.kpu.game.agp.tiledsample.TileView
+        app:map="@raw/earth"
+        app:tileset="@mipmap/forest_tiles"
+        app:sizeFactor="16"
         android:id="@+id/tileView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -112,13 +112,16 @@ public class TiledMap {
         dstRect.top = beg_y;
         dstRect.bottom = beg_y + dstTileHeight;
         int ty = tile_y;
-        while (ty < layer.height && dstRect.top < canvasHeight) {
+        while (dstRect.top < canvasHeight) {
             if (ty >= 0) {
                 dstRect.left = beg_x;
                 dstRect.right = beg_x + dstTileWith;
                 int tx = tile_x;
                 int ti = ty * width + tx;
-                while (tx < layer.width && dstRect.left < canvasWidth) {
+                while (dstRect.left < canvasWidth) {
+                    if (ti >= layer.data.length) {
+                        break;
+                    }
                     int tile = layer.data[ti];
                     ts.getRectForTile(tile, srcRect);
 //                    Log.d(TAG, "src=" + srcRect + " dst=" + dstRect + " tx=" + tx + " ty=" + ty + " ti=" + ti);
@@ -126,19 +129,16 @@ public class TiledMap {
                     dstRect.left += dstTileWith;
                     dstRect.right += dstTileWith;
                     ti++;
-                    tx++;
+                    tx = (tx + 1) % layer.width;
                 }
             }
             dstRect.top += dstTileHeight;
             dstRect.bottom += dstTileHeight;
-            ty++;
-            if (wraps && ty >= layer.height) {
-                ty -= layer.height;
-            }
+            ty = (ty + 1) % layer.height;
         }
 
         // for debug
-        canvas.drawText("Y=" + y, 100, 100, paint);
+        canvas.drawText("X=" + x + ", Y=" + y, 100, 100, paint);
     }
 
 }

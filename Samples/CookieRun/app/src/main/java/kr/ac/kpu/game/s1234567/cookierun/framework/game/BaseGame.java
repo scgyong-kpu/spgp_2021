@@ -13,6 +13,7 @@ import java.util.HashMap;
 import kr.ac.kpu.game.s1234567.cookierun.BuildConfig;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.BoxCollidable;
 import kr.ac.kpu.game.s1234567.cookierun.framework.iface.GameObject;
+import kr.ac.kpu.game.s1234567.cookierun.framework.view.GameView;
 
 public class BaseGame {
     private static final String TAG = BaseGame.class.getSimpleName();
@@ -84,6 +85,7 @@ public class BaseGame {
             top.resume();
         } else {
             Log.e(TAG, "should end app in popScene()");
+            GameView.view.finishActivity();
         }
     }
     public void recycle(GameObject object) {
@@ -107,6 +109,9 @@ public class BaseGame {
     }
 
     public void update() {
+        if (sceneStack.size() == 0) {
+            return;
+        }
         ArrayList<ArrayList<GameObject>> layers = getTopScene().getLayers();
         //if (!initialized) return;
         for (ArrayList<GameObject> objects: layers) {
@@ -117,6 +122,9 @@ public class BaseGame {
     }
 
     public void draw(Canvas canvas) {
+        if (sceneStack.size() == 0) {
+            return;
+        }
         draw(canvas, sceneStack.size() - 1);
     }
     protected void draw(Canvas canvas, int index) {
@@ -146,5 +154,14 @@ public class BaseGame {
 
     public boolean onTouchEvent(MotionEvent event) {
         return getTopScene().onTouchEvent(event);
+    }
+
+    public boolean handleBackKey() {
+        Scene scene = getTopScene();
+        if (scene.handleBackKey()) {
+            return true;
+        }
+        popScene();
+        return true;
     }
 }

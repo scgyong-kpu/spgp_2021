@@ -71,4 +71,5 @@ public class Scene {
     public void pause() {}
     public void resume() {}
     public boolean onTouchEvent(MotionEvent e) { return false; }
+    public boolean handleBackKey() { return false; }
 }

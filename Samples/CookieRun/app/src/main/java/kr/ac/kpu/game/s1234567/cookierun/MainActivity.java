@@ -29,4 +29,12 @@ public class MainActivity extends AppCompatActivity {
         GameView.view.resumeGame();
         super.onResume();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (GameView.view.handleBackKey()) {
+            return;
+        }
+        super.onBackPressed();
+    }
 }

@@ -37,7 +37,10 @@ class MapJsonReader {
                 reader.beginArray();
                 ArrayList<TiledLayer> layers = new ArrayList<>();
                 while (reader.hasNext()) {
-                    layers.add(readLayer(reader));
+                    TiledLayer layer = readLayer(reader);
+                    if (layer != null) {
+                        layers.add(layer);
+                    }
                 }
                 map.layers = layers;
                 reader.endArray();
@@ -76,17 +79,23 @@ class MapJsonReader {
         Log.v(TAG, " Reading layer:");
         TiledLayer layer = new TiledLayer();
         reader.beginObject();
+        String layerType = "";
         while (reader.hasNext()) {
             String name = reader.nextName();
             if (name.equals("data")) {
                 layer.data = readLayerData(reader);
                 Log.d(TAG, "int[] : " + layer.data.length + " integers");
+            } else if (name.equals("type")) {
+                layerType = reader.nextString();
             } else if (readProperty(layer, name, reader)) {
             } else {
                 reader.skipValue();
             }
         }
         reader.endObject();
+        if (!layerType.equals("tilelayer")) {
+            return null;
+        }
         return layer;
     }
 

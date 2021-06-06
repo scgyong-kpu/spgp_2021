@@ -7,8 +7,8 @@
     tools:context=".MainActivity">
 
     <kr.ac.kpu.game.agp.tiledsample.TileView
-        app:map="@raw/earth"
-        app:tileset="@mipmap/forest_tiles"
+        app:map="@raw/desert"
+        app:tileset="@mipmap/tmw_desert_spacing"
         app:sizeFactor="16"
         android:id="@+id/tileView"
         android:layout_width="match_parent"
